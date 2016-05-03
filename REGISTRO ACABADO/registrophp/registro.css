@@ -1,0 +1,185 @@
+/* HTML */
+
+html{
+
+	background-color: #46494C;
+}
+
+/* Header */
+
+#header{
+    
+    background: #DCDCDD;
+    
+    text-align: center;
+
+    /*border: 10px solid #1985A1;*/
+
+    border:6px groove #4c4c4c; /* Borde del formulario */
+
+}
+
+#inicio{
+
+	float:right;
+	margin-right: 20px;
+	margin-top: 20px;
+	font-family: Montserrat, sans-serif;
+	border-radius: 28px;
+	background: black;
+	background: #1985A1;
+	color:white;
+
+}
+
+#inicio:hover{
+
+		background: #46494C;
+}
+
+#logotipo{
+	
+	width: 300px;
+    height: 150px; 
+    
+    background-color: #DCDCDD;
+    
+    position:relative;
+    margin-bottom: 50px;
+   	top: 30px;
+   	margin-left: 55px;
+    
+    border: 5px solid #1985A1;
+    border-radius: 106px 106px 106px 106px;
+    border-radius: 106px 106px 106px 106px;
+    border-radius: 106px 106px 106px 106px;
+}
+
+
+/* Barra de menu */
+
+#barra {
+  
+	width: 100%;
+  
+	background: #1985A1;
+
+	display: flex;
+	flex-wrap: ltr;
+	justify-content: center;
+}
+
+.menu{
+	
+	width: 100px;
+	
+	position: relative;
+	text-align: center;
+	margin: 0;
+	
+	padding: 0;
+	list-style: none;
+	line-height: 1;
+}
+
+.menu:hover{
+
+	color: white;
+}
+
+
+/* Titulos */
+
+.titulo{
+
+    text-align: center;
+    color: white;
+    font-size: 30px;
+}
+
+
+
+
+fieldset {
+border:6px groove #ccc; /* Borde del formulario */
+background-image: url("registrowall2.png");/*Usamos de fondo esta imagen*/ 
+background-repeat: no-repeat;
+color:gold;/* Color del texto */
+text-align: center;
+font-size: 20px;
+font-style: italic;
+width: 90%;
+height: 800px;
+margin: 3%;
+background-size: 100% 100%;
+overflow: hidden;
+}
+
+
+legend {
+
+/*text-align:center; /* Texto de la leyenda */
+/*font-weight:bold; /* Estilo de la fuente del título */
+/*color:skyblue; /* Color del título */
+/*font-size: 45px;
+letter-spacing: 8px;
+text-shadow: -2px -2px 0px #cc0000, 2px -2px 0px #cc0000, -2px 2px 0px #cc0000, 2px 2px 0px #cc0000;
+*/
+font-style: normal;
+text-align:center; 
+color: #000;
+/*background: #DA251D;*/
+font-family: impact;
+font-size: 36px;
+/*
+line-height: 70%;
+letter-spacing: 4px;
+text-shadow: -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff, 2px 2px 0px #fff;*/
+}
+
+p{
+	font-family: Montserrat, sans-serif;
+}
+
+label{
+color: salmon;
+margin: 20px;
+padding: 20px;
+text-align:center; 
+color: #FCDB00;
+/*font-family: impact;*/
+/*
+letter-spacing: 12px;
+text-shadow: -2px -2px 1px #000, 2px 2px 1px #000, -2px 2px 1px #000, 2px -2px 1px #000;*/
+}
+
+.pform{
+	margin: 50px;
+}
+
+#formulario{
+	position: relative;
+	right: 38%;
+	top: 45%;
+}
+
+#enviar{
+	margin-top: 5px;
+	 background: darkred;
+	  padding: 10px; 
+	  color: white;
+}
+
+#ok{
+background-image: url("correcto.png");/*Usamos de fondo esta imagen*/ 
+background-repeat: no-repeat;
+background-size: 100% 100%;
+font-size: 48px;
+}
+
+#okno{
+background-image: url("triste.jpg");/*Usamos de fondo esta imagen*/ 
+background-repeat: no-repeat;
+background-size: 100% 100%;
+font-size: 48px;
+}
