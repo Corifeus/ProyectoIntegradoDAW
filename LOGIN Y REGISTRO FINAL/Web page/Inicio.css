@@ -1,0 +1,178 @@
+/* IMAGEN FONDO */
+
+body { 
+
+	background-image: url("IMAGENES/fondodif.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+/*IMAGEN SLITHER*/
+
+
+
+
+@keyframes slidy {
+
+  0% { left: 0%; }
+  20% { left: 0%; }
+  25% { left: -100%; }
+  45% { left: -100%; }
+  50% { left: -200%; }
+  70% { left: -200%; }
+  75% { left: -300%; }
+  85% { left: -300%; }
+  90% { left: -400%; }
+  100% { left: -400%; }
+}
+
+div#slider { 
+
+	overflow: hidden;
+ }
+
+div#slider figure img { 
+
+  width: 20%; 
+  height: 400px; 
+  float: left; 
+}
+
+div#slider figure { 
+  
+  position: relative;
+  width: 500%;
+  margin: 0;
+  left: 0;
+  text-align: left;
+  font-size: 0;
+  animation: 15s slidy infinite; 
+}
+
+
+
+
+/* PRECIOS JUEGOS */
+
+#juegos{
+    
+  font-family: Gill sans;
+  font-size: 20px;
+  color: #0D2C54;
+  margin-top: 25px;
+  margin-bottom: 25px;
+
+}
+
+.juego{
+
+  width: 40vh;
+  background-color: white;
+  text-align: center;
+}
+
+
+.imgJuego{
+
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 1100px) {
+
+  div#slider { 
+  
+    margin-right: 12%;
+    margin-left: 12%;
+  }
+
+  #juegos{
+    
+    margin-left: 12%;
+    margin-right: 12%;
+    display: flex;
+    flex-direction: ltr ;
+    justify-content: space-between;
+    align-self: center;
+  }
+  
+  .juego{
+
+    width: 40vh;
+  }
+
+  .imgJuego{
+
+    width: 40vh;
+    height:250px;
+  }
+}
+
+
+@media only screen and (min-width: 700px) and (max-width: 1100px){
+  
+   div#slider { 
+  
+    margin-right: 12%;
+    margin-left: 12%;
+  }
+
+  #juegos{
+    
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+
+  .juego{
+
+    width: 100%;
+  }
+
+  .imgJuego{
+
+    width: 100%;
+    height:350px;
+  }
+}
+
+
+@media only screen and (max-width: 700px){
+
+  .juego{
+
+    width: 100%;
+  }
+
+  .imgJuego{
+
+    width: 100%;
+    height:350px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

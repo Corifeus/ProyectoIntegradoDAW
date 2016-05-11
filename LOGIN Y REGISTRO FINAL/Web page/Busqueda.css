@@ -1,0 +1,99 @@
+/* IMAGEN FONDO */
+
+body { 
+
+    background-image: url("IMAGENES/fondo2.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center center;
+    background-attachment: fixed;
+
+
+}
+
+
+
+p{
+
+     text-align: center;
+     font-family: Gill sans;
+    font-size: 20px;
+}
+
+
+#juegos{
+    
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row wrap;
+  justify-content: space-between;
+
+  font-family: Gill sans;
+  font-size: 20px;
+  color: #0D2C54;
+  
+
+ 
+}
+
+
+#precio{
+
+ width: 200px;
+
+background-color: white;
+
+
+text-align: center;
+
+ margin-top: 25px;
+
+}
+
+#juego1{
+
+  text-align: center;
+  height:200px;
+  width: 200px;
+}
+
+
+
+@media screen and (min-width: 1100px) {
+    
+ 
+
+
+
+#juegos{
+
+  margin-left: 12%;
+  margin-right: 12%;
+}
+
+}
+
+
+@media only screen and (min-width: 700px) and (max-width: 1100px){
+    
+  
+
+      #juegos{
+
+  margin-left: 12%;
+  margin-right: 12%;
+} 
+
+
+}
+
+
