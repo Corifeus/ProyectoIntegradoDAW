@@ -1,0 +1,10 @@
+<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+<link rel="stylesheet" href="assets/css/reset.css">
+<link rel="stylesheet" href="assets/css/supersized.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="app/views/default/css/Cabecera.css">
+<link rel="stylesheet" href="app/views/default/css/LoginAnimacion.css">
+<link rel="stylesheet" href="app/views/default/css/LoginDemo.css">
+<link rel="stylesheet" href="app/views/default/css/Login1.css">
+<link rel="stylesheet" href="app/views/default/css/Login2.css">
+<link rel="stylesheet" href="app/views/default/css/Login3.css">

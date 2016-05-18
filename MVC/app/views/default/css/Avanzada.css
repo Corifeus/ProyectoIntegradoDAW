@@ -1,0 +1,87 @@
+body { 
+
+    background-image: url("http://localhost/MVC/app/views/default/images/3.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center center;
+    background-attachment: fixed;
+
+
+}
+
+#busquedaAv{
+
+	border: solid 3px #F6511D;
+	
+	color: #0D2C54;
+ 	font-family: Gill sans; 
+
+ 	
+
+	margin-top: 25px;
+
+	background-color: white;
+
+	text-align: center;
+}
+
+#precmin{
+	
+	width: 50px;
+	text-align: center;
+}
+
+
+#busquedaAv{
+
+	border: solid 5px #00A6ED;
+	
+	color: #0D2C54;
+ 	font-family: Gill sans; 
+
+ 		margin-left: 12%;
+	margin-right: 12%;
+}
+
+
+
+
+input[type = "radio"]{ display:none;}
+
+label:hover{color:#F6511D;}
+
+
+.clasificacion{
+
+	text-align: center;
+   	direction: rtl;/* right to left */
+    unicode-bidi: bidi-override;/* bidi de bidireccional */
+  }
+
+
+label:hover ~ label{color:#F6511D;}
+
+input[type = "radio"]:checked ~ label{color:#F6511D;}
+
+
+
+
+
+@media screen and (min-width: 1100px) {
+	
+	#busquedaAv{
+
+		margin-left: 12%;
+		margin-right: 12%;
+	}
+}
+
+
+@media only screen and (min-width: 700px) and (max-width: 1100px){
+		
+	#busquedaAv{
+
+		margin-left: 12%;
+		margin-right: 12%;
+	}
+}

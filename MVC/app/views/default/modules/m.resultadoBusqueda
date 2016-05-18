@@ -1,0 +1,61 @@
+<div id="juegos">
+
+			
+			<div id="precio">
+				
+				<img id="juego1" src="IMAGENES/juego4.jpg">
+
+				<div class="nombrePrec">
+				<p> NOMBRE </p>
+				<p> PRECIO </p>
+
+				</div>
+
+			</div>
+
+			<div id="precio">
+				
+				<img id="juego1" src="IMAGENES/juego5.jpg">
+
+				
+				<div class="nombrePrec">
+				<p> NOMBRE </p>
+				<p> PRECIO </p>
+
+				</div>
+
+			</div>
+
+			<div id="precio">
+				
+				<img id="juego1" src="IMAGENES/juego2.jpg">
+
+		
+
+				<div class="nombrePrec"> 
+	
+				<p> NOMBRE </p>
+				<p> PRECIO </p>
+
+				</div>
+
+			</div>
+
+			
+			<div id="precio">
+				
+				<img id="juego1" src="IMAGENES/juego1.jpg">
+
+		
+
+				<div class="nombrePrec"> 
+				
+				<p> NOMBRE </p>
+				<p> PRECIO </p>
+
+				</div>
+
+			</div>
+
+
+		</div>
