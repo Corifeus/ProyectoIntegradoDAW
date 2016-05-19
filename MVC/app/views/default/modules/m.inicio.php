@@ -1,13 +1,4 @@
-<table>
-					<td><tr>
-						<?php
-							var_dump($array);
-							//echo $array[0]->Nombre;
-						?>
 
-					</tr></td>
-				</table>
-	
 <div id="slider">
 			
 			<figure>

@@ -1,33 +1,22 @@
 <div id="juegos">
 
-			<div>
-				
-				<img class="juego" src="IMAGENES/precio1.jpg" alt="juego">
 
-			</div>
+	<span id="mensajeSeccion"><h1>Lista de juegos favoritos de 
+		#USUARIO#
+	</h1></span>
 
-			<div>
-				
-				<img class="juego" src="IMAGENES/precio1.jpg" alt="juego">
+		#FAVORITOS#
 
-			</div>
+	<span id="mensajeSeccion"><h1>Biblioteca de 
+		#USUARIO#
+	</h1></span>
+		
+		#BIBLIOTECA#
 
-			<div>
-				
-				<img class="juego" src="IMAGENES/precio1.jpg" alt="juego">
+	<span id="mensajeSeccion"><h1>Vídeos de 
+		#USUARIO#
+	</h1></span>
 
-			</div>
-
-			<div>
-				
-				<img class="juego" src="IMAGENES/precio1.jpg" alt="juego">
-
-			</div>
-
-			<div>
-				
-				<img class="juego" src="IMAGENES/precio1.jpg" alt="juego">
-
-			</div>
-
+		#VIDEOS#
+		
 </div>

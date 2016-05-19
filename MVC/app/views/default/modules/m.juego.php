@@ -1,57 +1,15 @@
 <div id="juegos">
 		
-			<div id="precio">
-				
-				<img id="juego1" src="app/views/default/images/steam.png">
+			#PRECIO1#
 
-				<div class="nombrePrec">
+			#PRECIO2#
 
-				<p> PRECIO </p>
+			#PRECIO3#
 
-				</div>
+			#PRECIO4#
 
-			</div>
+	<div id="infoJuego">
+		#INFO#
+	</div>
 
-			<div id="precio">
-				
-				<img id="juego1" src="app/views/default/images/gamesgate.jpeg">
-
-				
-				<div class="nombrePrec">
-
-				<p> PRECIO </p>
-
-				</div>
-
-			</div>
-
-			<div id="precio">
-				
-				<img id="juego1" src="app/views/default/images/fun.jpeg">
-
-		
-
-				<div class="nombrePrec"> 
-	
-
-				<p> PRECIO </p>
-
-				</div>
-
-			</div>
-
-			
-			<div id="precio">
-				
-				<img id="juego1" src="app/views/default/images/gamesRocket.png">
-
-		
-
-				<div class="nombrePrec"> 
-
-				<p> PRECIO </p>
-
-				</div>
-
-			</div>
 </div>

@@ -1,10 +1,12 @@
 <div id="juegoBus">
 			
-				<img src="http://cdn.akamai.steamstatic.com/steam/apps/500/header.jpg?t=1447903113" id="caratula" alt="caratula">
+				#IMAGEN#
 				
 				<div id="descripcionJuego">
 
-				<p> NOMBRE </p>
+				<p> #NOMBRE# </p>
+
+        <p> Precio de Salida: #PRECIO# €</p>
 
 				  <p class="clasificacion">
    					<input id="radio1" type="radio" name="estrellas" value="5">
@@ -18,6 +20,7 @@
   					<input id="radio5" type="radio" name="estrellas" value="1">
   					<label for="radio5">&#9733;</label>
   					</p>
+
 
 				</div>
 

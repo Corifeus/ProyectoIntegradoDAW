@@ -2,7 +2,7 @@
 
 body { 
 
-	background-image: url("http://localhost/MVC/app/views/default/images/lucha.jpg");
+  background-image: url("http://localhost/MVC/app/views/default/images/lucha.jpg");
   background-repeat: no-repeat;
   background-size:cover;
   background-position: center center;
@@ -14,30 +14,37 @@ body {
 
 #imgPerfil{
 
-	display: flex;
-	flex-wrap: ltr;
-	justify-content: center;
+  display: flex;
+  flex-wrap: ltr;
+  justify-content: center;
   }
 
 #fotoPerfil{
 
-	height: 200px;
-	width: 225px;
-	margin-top: 25px;
-	margin-bottom: 25px;
+  height: 200px;
+  width: 225px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 
 }
 
 #nick{
 
-	display: flex;
-  justify-content: center;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
 
-      font-family: Gill sans;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
     font-size: 25px;
     color: #0D2C54;
+ text-align: center;
+ 
 }
 
+.nick2{
+ margin-top: 25px;
+
+}
 
 
 /* PRECIOS JUEGOS */

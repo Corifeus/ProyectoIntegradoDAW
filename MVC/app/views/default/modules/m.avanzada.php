@@ -1,12 +1,10 @@
 <fieldset id="busquedaAv">	
-					
-
-					<p class="precio">
+				<p class="precio">
 				
 							PRECIO MAXIMO:
 							<input  id="precmin" type="number" name="points" min="0" step="5" value="0">  €
 						
-					</p>
+				</p>
 
 				
 						
@@ -60,7 +58,7 @@
 
 					<p class="inicioBusq">
 
-						<input type="submit" value="Bucar juego">
+						<input type="submit" value="Buscar juego">
 
 					</p>
 
