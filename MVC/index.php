@@ -15,13 +15,13 @@
 			$mvc->perfil();	
 	}
 	else if( $_GET['action'] == 'conectarse' ){
-			$mvc->conectarse();	
+			$mvc->registrarse();	
 	}
 	else if( $_GET['action'] == 'avanzada' ){
 			$mvc->buscador();
 	}
 	else if( $_GET['action'] == 'busqueda' ){
-			$mvc->buscador();
+			$mvc->resultadoBusqueda();
 	}
 	else if( $_GET['action'] == 'juego' ){
 			$mvc->paginaJuego();
@@ -31,18 +31,7 @@
 	}
 	else if(!isset($_SESSION["nombreusuario"])){
 			$mvc->menuInicioSesion();
-	}*/
-	/*
-	else if( isset($_POST['facultad']) && 
-			 isset($_POST['nombre']) &&
-			 isset($_POST['apellido1']) &&
-			 isset($_POST['apellido2']) &&
-			 isset($_POST['dni'])){
-		$mvc->insertar($_POST['nombre'], $_POST['apellido1'], $_POST['apellido2'], $_POST['dni'], $_POST['facultad'] );
-	}
-	else if(isset($_POST['facultad'])){
-			$mvc->buscar( $_POST['facultad']);
-	}*/
+	*/
 	else{	
 		$mvc->principal();
 	}

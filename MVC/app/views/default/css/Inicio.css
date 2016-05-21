@@ -11,8 +11,6 @@ body {
 /*IMAGEN SLITHER*/
 
 
-
-
 @keyframes slidy {
 
   0% { left: 0%; }
@@ -113,7 +111,7 @@ div#slider figure {
   .imgJuego{
 
     width: 40vh;
-    height:180px;
+    height:170px;
   }
 }
 

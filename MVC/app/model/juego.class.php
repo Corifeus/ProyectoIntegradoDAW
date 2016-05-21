@@ -63,7 +63,8 @@ class Juego extends Database{
 		//error_reporting(0);
 		if($this->conectar()){
 			$tabla="juego";
-			$nombre=$_POST["nombrejuego"];
+			$nombre=$_POST["nombre"];
+			//var_dump($nombre);
 			$sentencia='SELECT COUNT(*) as "TotalEncontrados" FROM '.$tabla.' WHERE Nombre LIKE "%' . $nombre . '%" AND Precio_Original IS NOT NULL';
 			//Mostrar el total de juegos encontrados
 			if($this->consulta($sentencia)){
@@ -71,33 +72,54 @@ class Juego extends Database{
 				while($objeto=mysqli_fetch_object($resultado)){
 					$array[]=$objeto;
 					$resultadoBusqueda=$array[0]->TotalEncontrados;
-					echo $resultadoBusqueda;
+					//echo $resultadoBusqueda;
 				}
-				$sentencia2='SELECT Nombre,Precio_Original FROM ' . $tabla . ' WHERE Nombre LIKE "%' . $nombre . '%" AND Precio_Original IS NOT NULL';
+				$sentencia2='SELECT Id_Juego,Nombre,Imagen,Precio_Original FROM '. $tabla .' WHERE Nombre LIKE "%' . $nombre . '%" AND Precio_Original IS NOT NULL';
 				if($this->consulta($sentencia2)){
 					$resultado2=$this->consulta($sentencia2);
 					while($objeto2=mysqli_fetch_object($resultado2)){
 						$array2[]=$objeto2;
 					}
-					foreach ($array2 as $key => $value) {
-						foreach ($value as $key2 => $value2) {
-							/*echo "<br>$key2--->$value2";*/
-						}
-						/*echo "<br>";*/
-					}
-					/*var_dump($array2);
-					echo "<br><br><br>";
-					echo $array2[0]->Nombre;
-					echo $array2[0]->Precio_Original;*/
+					//var_dump($array2);
 				}
-
 				/*var_dump($array);*/
 				$this->desconectar();
 			}else{
  				echo "No se han encontrado resultados";
 			}	
 		}
+		return $array2;
 	}
+	function buscarAvanzado(){
+		error_reporting(0);
+		if($this->conectar()){
+			$gen=$_POST["nombregenero"];
+			if($gen==''){
+				$sentencia='SELECT Id_Juego,Nombre,Imagen,Precio_Original FROM juego WHERE Precio_Original>0';	
+			}else{
+				$sentencia='SELECT Id_Juego,Nombre,Imagen,Precio_Original FROM juego j, genero_del_juego g WHERE Precio_Original>0 AND Id_Genero='. $gen;
+			}
+			$letra=$_POST["letras"];
+			if($letra!=''){
+				$sentencia=$sentencia.' AND Nombre LIKE "'. $letra .'%"';
+			}
+			$max=$_POST["precioMax"];
+			$sentencia=$sentencia.' AND Precio_Original <='. $max ;
+			$des=$_POST["desarrollador"];
+			if($des!=''){
+				$sentencia=$sentencia.' AND Desarrollador LIKE"'. $des.'"' ;
+			}
+			if($this->consulta($sentencia)){
+				$resultado=$this->consulta($sentencia);
+				while($objeto=mysqli_fetch_object($resultado)){
+					$array[]=$objeto;
+					//echo $resultadoBusqueda;
+				}
+			}
+			return $array;
+			$this->desconectar();
+		}
+	}	
 }
 
 ?>

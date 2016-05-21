@@ -1,0 +1,38 @@
+footer{
+
+	background-color: white;
+	
+	border: solid 5px #00A6ED;
+	margin: 20px;
+	display: flex;
+	flex-direction: ltr;
+
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif; 
+	color: #0D2C54;
+	justify-content:space-between;
+
+
+
+}
+
+.imgFooter{
+
+	width: 70px;
+	height: 70px;
+	margin: 20px;
+
+}
+
+#redes{
+
+
+	text-align: center;
+
+}
+
+.apartado{
+
+	margin-right: 75px;
+	margin-left: 75px;
+	text-align: center;
+}

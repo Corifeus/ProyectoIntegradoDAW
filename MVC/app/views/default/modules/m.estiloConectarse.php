@@ -8,3 +8,4 @@
 <link rel="stylesheet" href="app/views/default/css/Login1.css">
 <link rel="stylesheet" href="app/views/default/css/Login2.css">
 <link rel="stylesheet" href="app/views/default/css/Login3.css">
+<link rel="stylesheet" href="app/views/default/css/footer.css">

@@ -20,14 +20,14 @@ class Administrador extends Juego{
 		    		$v3=($decodes->{"$i"}->{'owners'});//Recoge el nº de porpietarios
 		    		$v4=($decodes->{"$i"}->{'developer'});//Recoge el desarrollador
 		    		//Con siguiente sentencia se introducen los datos en la tabla correspondiente
-		    		$sentencia="INSERT INTO $tabla (Id_Juego,Nombre,Desarrollador,Numero_Propietarios) VALUES ($v1,'$v2','$v4',$v3)";
+		     		$sentencia="INSERT INTO $tabla (Id_Juego,Nombre,Desarrollador,Numero_Propietarios) VALUES ($v1,'$v2','$v4',$v3)";
 					if($objeto->query($sentencia)){
 						echo "Juego $v1 insertado";	
 					}else{
 						echo "Error al crear juego";
 					}
 					$sentencia="SELECT id FROM $tabla";
-					$res=mysqli_query($objeto, $sentencia);
+					$res=$this->consulta($sentencia);
 					print "Se han obtenido $res->num_rows resultados en la consulta<br>";
 					foreach($res as $i){
 						$url='http://store.steampowered.com/app/'.$i['id'];
@@ -40,6 +40,9 @@ class Administrador extends Juego{
 							$id=explode('"',$infoId[1]);
 							$infoFecha=explode('<span class="date">',$html);
 							$fecha=explode('</span>',$infoFecha[1]);
+							$fechas=str_replace(',', '', $fecha[0]);
+							$time = strtotime($fechas);
+							$fec = date('Y-m-d',$time);
 							$infoPrecio=explode('<meta itemprop="price" content="',$html);
 							if(sizeof($infoPrecio)==1){
 								$infoPrecio=explode('price">',$html);
@@ -54,9 +57,9 @@ class Administrador extends Juego{
 							$pre=str_replace(',', '.', $pre);
 							$pre=str_replace('Free To Play', '0.00', $pre);
 							$pre=str_replace('Free to Play', '0.00', $pre);
-							$sentencia="UPDATE $tabla SET precioSalida=$pre, fechaSalida='$fec', imagen=$ima WHERE id=$ide;";
+							$sentencia="UPDATE juego SET Precio_Original=$pre, Fecha='$fec', Imagen=$ima WHERE Id_Juego=$ide;";
 							//echo $sentencia . "<br>";
-							if(mysqli_query($objeto, $sentencia)){
+							if($this->consulta($sentencia)){
 								print "Se ha actualizado el juego $ide: $nom<br>";
 							}else{
 								print "Error al actualizar el juego $ide: $nom<br>";
@@ -68,6 +71,7 @@ class Administrador extends Juego{
 								$gen=explode('</a>',$lista[$j]);
 								//echo $gen[0];
 							}
+
 						}
 					}
 				}

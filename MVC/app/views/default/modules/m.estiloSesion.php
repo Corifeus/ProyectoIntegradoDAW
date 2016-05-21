@@ -2,3 +2,4 @@
 <link rel="stylesheet" href="assets/css/reset.css">
 <link rel="stylesheet" href="assets/css/supersized.css">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="app/views/default/css/footer.css">

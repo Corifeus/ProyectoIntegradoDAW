@@ -2,19 +2,19 @@
 
 
 	<span id="mensajeSeccion"><h1>Lista de juegos favoritos de 
-		#USUARIO#
+		#NOMBREUSUARIO#
 	</h1></span>
 
 		#FAVORITOS#
 
 	<span id="mensajeSeccion"><h1>Biblioteca de 
-		#USUARIO#
+		#NOMBREUSUARIO#
 	</h1></span>
 		
 		#BIBLIOTECA#
 
 	<span id="mensajeSeccion"><h1>Vídeos de 
-		#USUARIO#
+		#NOMBREUSUARIO#
 	</h1></span>
 
 		#VIDEOS#
