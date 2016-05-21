@@ -45,7 +45,7 @@ div#slider figure {
   left: 0;
   text-align: left;
   font-size: 0;
-  animation: 15s slidy infinite; 
+  animation: 20s slidy infinite; 
 }
 
 
@@ -55,7 +55,7 @@ div#slider figure {
 
 #juegos{
     
-  font-family: Gill sans;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 20px;
   color: #0D2C54;
   margin-top: 25px;

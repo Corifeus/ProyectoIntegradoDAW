@@ -109,6 +109,7 @@ class Juego extends Database{
 			if($des!=''){
 				$sentencia=$sentencia.' AND Desarrollador LIKE"'. $des.'"' ;
 			}
+			//var_dump($sentencia);
 			if($this->consulta($sentencia)){
 				$resultado=$this->consulta($sentencia);
 				while($objeto=mysqli_fetch_object($resultado)){
@@ -120,6 +121,37 @@ class Juego extends Database{
 			$this->desconectar();
 		}
 	}	
+	function buscarGenero(){
+		error_reporting(0);
+		if($this->conectar()){
+			$gen=$_POST["nombregenero"];
+			if($gen==''){
+				$sentencia='SELECT Id_Juego,Nombre,Imagen,Precio_Original FROM juego WHERE Precio_Original>0';	
+			}else{
+				$sentencia='SELECT Id_Juego,Nombre,Imagen,Precio_Original FROM juego j, genero_del_juego g WHERE Precio_Original>0 AND Id_Genero='. $gen;
+			}
+			$letra=$_POST["letras"];
+			if($letra!=''){
+				$sentencia=$sentencia.' AND Nombre LIKE "'. $letra .'%"';
+			}
+			$max=$_POST["precioMax"];
+			$sentencia=$sentencia.' AND Precio_Original <='. $max ;
+			$des=$_POST["desarrollador"];
+			if($des!=''){
+				$sentencia=$sentencia.' AND Desarrollador LIKE"'. $des.'"' ;
+			}
+			//var_dump($sentencia);
+			if($this->consulta($sentencia)){
+				$resultado=$this->consulta($sentencia);
+				while($objeto=mysqli_fetch_object($resultado)){
+					$array[]=$objeto;
+					//echo $resultadoBusqueda;
+				}
+			}
+			return $array;
+			$this->desconectar();
+		}
+	}
 }
 
 ?>

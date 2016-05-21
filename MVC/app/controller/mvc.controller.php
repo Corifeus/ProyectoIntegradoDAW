@@ -8,9 +8,11 @@ require 'pageGenerator.php';
 class mvc_controller {
  
 	function principal(){
+		//session_reset();
    		$pagina=load_template('Digital Games - Inicio');
-   		var_dump($_SESSION);
-		if(isset($_SESSION["nombreusuario"])&&($_SESSION["nombreusuario"])!=null){
+   		//session_start();
+   		//var_dump($_SESSION);
+		if(isset($_SESSION)&&($_SESSION)!=null){
 			$sesion = load_page('app/views/default/modules/m.menuPerfil.php');
 		}else{
 			$sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
@@ -56,7 +58,7 @@ class mvc_controller {
 		//var_dump($lista);
 		$generos='';
 		for($i=1;$i<=sizeof($lista);$i++){
-			$nombreGenero='<div class="nombreGenero"><p>'.$lista[$i-1]->Nombre.'</p></div><div id="juegos">';
+			$nombreGenero='<div class="nombreGenero"><a href="index.php?action=genero&id='.$lista[$i-1]->Id_Genero.'"><p>'.$lista[$i-1]->Nombre.'</p></a></div><div id="juegos">';
 			$generos=$generos.$nombreGenero;
 			$popular=$genero1->juegosGenero($i);
 			//var_dump($popular);
@@ -91,8 +93,15 @@ class mvc_controller {
    		$logo = load_page('app/views/default/modules/m.logo.php');
 		$html = load_page('app/views/default/modules/m.resultadoBusqueda.php');
 		$juego1=new Juego;
-		$arrayJuego=$juego1->buscar();
-		//$arrayJuego=$juego1->buscarAvanzado();
+		//var_dump($_POST);
+		if(isset($_POST['precioMax'])){
+			//echo "Busqueda Avanzada";
+			$arrayJuego=$juego1->buscarAvanzado();
+		}else{
+			$arrayJuego=$juego1->buscar();
+			//echo "Busqueda por nombre";
+		}
+		//
 		$encontrados='<div class="fila">';
 		$j=1;
 		//var_dump($arrayJuego);
@@ -113,10 +122,12 @@ class mvc_controller {
 				}
 			}
 			$encontrados=$encontrados.'</div>';
-			$reemplazo='/\#RESULTADOS\#/ms';
-			$html = replace_content($reemplazo,$encontrados,$html);
 			
+		}else{
+			$encontrados='<div class="juego"><p>No se han encontrado juegos</p><p></div>';
 		}
+		$reemplazo='/\#RESULTADOS\#/ms';
+		$html = replace_content($reemplazo,$encontrados,$html);	
 		replace_page($css,$logo,$sesion,$html,$pagina);
 	}
 
@@ -190,25 +201,23 @@ class mvc_controller {
 			$videos="No tienes videos";
 		}
 		$html = replace_content('/\#VIDEOS\#/ms',$videos,$html);
-
-		
 		replace_page($css,$logo,$sesion,$html,$pagina);
 	}
 
 	function registrarse(){
-		session_unset($usuario1);
-		error_reporting(0);
-		$pagina=load_template('Digital Games - Perfil');
-   		$css = load_page('app/views/default/modules/m.estiloPerfil.php');
-   		$logo = load_page('app/views/default/modules/m.logoPerfil.php');
+		//session_unset($usuario1);
+		//error_reporting(0);
+		$pagina=load_template('Digital Games - Inicio Sesión');
+   		$css = load_page('app/views/default/modules/m.estiloConectarse.php');
+   		$logo = load_page('app/views/default/modules/m.logo.php');
    		$usuario1=new Usuario;
-   		$usuario1->registrar();
+   		//$usuario1->registrar();
 		#SACAR LOS FAVORITOS
 		$tabla="favoritos";
 		//$usuario1->datosPerfil();
 		//var_dump($usuario1);
-		$nombreUsuario=$_SESSION["nombreusuario"];
-		$sentencia='SELECT j.Nombre,j.Imagen,j.Id_Juego FROM favoritos f,usuario u,juego j 
+		//$nombreUsuario=$_SESSION["nombreusuario"];
+		/*$sentencia='SELECT j.Nombre,j.Imagen,j.Id_Juego FROM favoritos f,usuario u,juego j 
 			WHERE f.Id_Usuario=u.Id_Usuario 
 			AND j.Id_Juego=f.Id_Juego 
 			AND u.Nombre="' . $nombreUsuario. '"';
@@ -217,15 +226,9 @@ class mvc_controller {
 			while($objeto=mysqli_fetch_object($resultado)){
 				$arrayFavorito[]=$objeto;
 			}
-		}
-		$usuario1->mostrar($arrayFavorito);
-	}
-
-	function menuInicioSesion(){
-		$pagina=load_template('Digital Games - Iniciar Sesión');
-   		$css = load_page('app/views/default/modules/m.estiloConectarse.php');
-   		$logo = load_page('app/views/default/modules/m.logo.php');				
-		$html = load_page('app/views/default/modules/m.iniciosesion.php');
+		}*/
+		//$usuario1->mostrar($arrayFavorito);
+		$html = load_page('app/views/default/modules/m.inicioSesion.php');
 		replace_page($css,$logo,$sesion,$html,$pagina);
 	}
 

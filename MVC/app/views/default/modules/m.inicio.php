@@ -3,8 +3,7 @@
 			
 			<figure>
 				
-			<a href="index.php?action=juego">
-				#JUEGO4# </a>
+				#JUEGO4#
 				#JUEGO5#
 				#JUEGO6#
 				#JUEGO7#

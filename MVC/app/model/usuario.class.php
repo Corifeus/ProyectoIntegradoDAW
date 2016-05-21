@@ -96,7 +96,7 @@ class Usuario extends Database {
 	}
 
 	function datosPerfil(){
-		session_start();
+		//session_start();
 		
 		if($_SESSION["nombreusuario"]==false){
 			sleep(0);
