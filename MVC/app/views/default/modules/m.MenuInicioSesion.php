@@ -1,1 +1,1 @@
-<a href="index.php?action=conectarse" class="inicioSesion"> INICIO SESION </a>
+<a href="index.php?action=registrarse" class="inicioSesion"> INICIO SESION </a>

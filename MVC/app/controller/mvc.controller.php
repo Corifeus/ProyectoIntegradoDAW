@@ -8,15 +8,14 @@ require 'pageGenerator.php';
 class mvc_controller {
  
 	function principal(){
-		//session_reset();
    		$pagina=load_template('Digital Games - Inicio');
-   		//session_start();
-   		//var_dump($_SESSION);
-		if(isset($_SESSION)&&($_SESSION)!=null){
-			$sesion = load_page('app/views/default/modules/m.menuPerfil.php');
-		}else{
-			$sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
+   		session_start(); 
+		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
+		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
+		}else{   
+		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
 		}
+   		//var_dump($_SESSION);
    		$css = load_page('app/views/default/modules/m.estiloInicio.php');
    		$logo = load_page('app/views/default/modules/m.logo.php');
 		$html = load_page('app/views/default/modules/m.inicio.php');
@@ -50,37 +49,78 @@ class mvc_controller {
 
 	function genero(){
 		$pagina=load_template('Digital Games - Géneros');
-   		$css = load_page('app/views/default/modules/m.estiloGenero.php');
-   		$logo = load_page('app/views/default/modules/m.logo.php');
-		$html = load_page('app/views/default/modules/m.genero.php');
-		$genero1=new Genero;
-		$lista=$genero1->listarGeneros();
-		//var_dump($lista);
-		$generos='';
-		for($i=1;$i<=sizeof($lista);$i++){
-			$nombreGenero='<div class="nombreGenero"><a href="index.php?action=genero&id='.$lista[$i-1]->Id_Genero.'"><p>'.$lista[$i-1]->Nombre.'</p></a></div><div id="juegos">';
-			$generos=$generos.$nombreGenero;
-			$popular=$genero1->juegosGenero($i);
-			//var_dump($popular);
-			for ($j=0;$j<3;$j++){ 
-				$juegoPopular=ob_get_clean();
-				$juegoPopular='<div class="juego">
-					<a href="index.php?action=juego&id='.$popular[$j]->Id_Juego.'">			
-					<img class="imgJuego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.$popular[$j]->Id_Juego.'/header.jpg?t='.$popular[$j]->Imagen.'" id="juego4">
-					<div class="nombrePrec">
-					<p>'. $popular[$j]->Nombre .'</p><p>Precio de Salida: '.$popular[$j]->Precio_Original.' €</p>
-					</div></a></div>';
-				$generos=$generos.$juegoPopular;
+		session_start(); 
+		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
+		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
+		}else{   
+		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
+		}
+	   	$css = load_page('app/views/default/modules/m.estiloGenero.php');
+	   	$logo = load_page('app/views/default/modules/m.logo.php');
+	   	$html = load_page('app/views/default/modules/m.genero.php');
+	   	$genero1=new Genero;
+		if(isset($_GET['id'])){
+			$arrayJuego=$genero1->buscarGenero();
+			$generos='<div class="fila">';
+			$j=1;
+			//var_dump($arrayJuego);
+			if($arrayJuego!=''){
+				$filas=sizeof($arrayJuego)/3;
+				for($i=0;$i<sizeof($arrayJuego);$i++){
+					$generos=$generos.'<div class="juego">
+						<a href="index.php?action=juego&id='.$arrayJuego[$i]->Id_Juego.'">			
+						<img class="imgJuego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.$arrayJuego[$i]->Id_Juego.'/header.jpg?t='.$arrayJuego[$i]->Imagen.'">
+						<div class="nombrePrec">
+						<p>'. $arrayJuego[$i]->Nombre .'</p><p>Precio de Salida: '.$arrayJuego[$i]->Precio_Original.' €</p>
+						</div></a></div>';
+					if($j>($filas)){
+						$generos=$generos.'</div><div class="fila">';
+						$j=1;
+					}else{
+						$j++;
+					}
+				}
+				$generos=$generos.'</div>';
+			}else{
+				$generos='<div class="juego"><p>No se han encontrado juegos</p><p></div>';
 			}
-			$generos=$generos."</div>";
+		}else{
+
+			$lista=$genero1->listarGeneros();
+			//var_dump($lista);
+			$generos='';
+			for($i=1;$i<=sizeof($lista);$i++){
+				$nombreGenero='<div class="nombreGenero"><a href="index.php?action=genero&id='.$lista[$i-1]->Id_Genero.'"><p>'.$lista[$i-1]->Nombre.'</p></a></div><div id="juegos">';
+				$generos=$generos.$nombreGenero;
+				$juego=$genero1->juegosGenero($i);
+				//var_dump($popular);
+				for ($j=0;$j<3;$j++){ 
+					$juegos=ob_get_clean();
+					$juegos='<div class="juego">
+						<a href="index.php?action=juego&id='.$juego[$j]->Id_Juego.'">			
+						<img class="imgJuego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.$juego[$j]->Id_Juego.'/header.jpg?t='.$juego[$j]->Imagen.'" id="juego4">
+						<div class="nombrePrec">
+						<p>'. $juego[$j]->Nombre .'</p><p>Precio de Salida: '.$juego[$j]->Precio_Original.' €</p>
+						</div></a></div>';
+					$generos=$generos.$juegos;
+				}
+				$generos=$generos."</div>";
+			}
+			
 		}
 		$reemplazo='/\#GENEROS\#/ms';
-		$html = replace_content($reemplazo ,$generos , $html);
+		$html = replace_content($reemplazo,$generos,$html);
 		replace_page($css,$logo,$sesion,$html,$pagina);
 	}
 
 	function buscador(){
 		$pagina=load_template('Digital Games - Busqueda');
+		session_start(); 
+		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
+		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
+		}else{   
+		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
+		}
    		$css = load_page('app/views/default/modules/m.estiloBusqueda.php');
    		$logo = load_page('app/views/default/modules/m.logo.php');
 		$html = load_page('app/views/default/modules/m.avanzada.php');
@@ -89,6 +129,12 @@ class mvc_controller {
 
 	function resultadoBusqueda(){
 		$pagina=load_template('Digital Games - Resultado Busqueda');
+		session_start(); 
+		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
+		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
+		}else{   
+		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
+		}
    		$css = load_page('app/views/default/modules/m.estiloBusqueda.php');
    		$logo = load_page('app/views/default/modules/m.logo.php');
 		$html = load_page('app/views/default/modules/m.resultadoBusqueda.php');
@@ -134,102 +180,87 @@ class mvc_controller {
 	function perfil(){
 		error_reporting(0);
 		$pagina=load_template('Digital Games - Perfil');
-		var_dump($_SESSION);
-		if(isset($_SESSION["nombreusuario"])&&($_SESSION["nombreusuario"])!=null){
-			$sesion = load_page('app/views/default/modules/m.menuPerfil.php');
-		}else{
-			$sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
+		session_start(); 
+		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
+		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
+		}else{   
+		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
 		}
    		$css = load_page('app/views/default/modules/m.estiloPerfil.php');
    		$logo = load_page('app/views/default/modules/m.logoPerfil.php');
    		$usuario1=new Usuario;
-		
-		$tabla="favoritos";
 		$usuario1->login();
 		$usuario1->datosPerfil();
 		//var_dump($_SESSION);
 		$nombreUsuario=$_SESSION['nombreusuario'];
    		$logo = replace_content('/\#NOMBREUSUARIO\#/ms',$nombreUsuario,$logo);
    		$html = load_page('app/views/default/modules/m.perfil.php');
-   		$html = replace_content('/\#NOMBREUSUARIO\#/ms',$nombreUsuario,$html);
+   		//$html = replace_content('/\#NOMBREUSUARIO\#/ms',$nombreUsuario,$html);
    		//SACAR LOS FAVORITOS
-		$sentencia='SELECT j.Nombre,j.Imagen,j.Id_Juego FROM favoritos f,usuario u,juego j 
-			WHERE f.Id_Usuario=u.Id_Usuario 
-			AND j.Id_Juego=f.Id_Juego 
-			AND u.Nombre="' . $nombreUsuario. '"';
-		//var_dump($sentencia);
-		if($usuario1->consulta($sentencia)){
-			$resultado=$usuario1->consulta($sentencia);
-			//echo "gatitos";
-			//var_dump($resultado);
-			//var_dump($usuario1);
-			while($objeto=mysqli_fetch_object($resultado)){
-				$arrayFavorito[]=$objeto;
-			}
+   		$array=$usuario1->favoritosPerfil();
+   		$juegosFavoritos='<span id="mensajeSeccion"><h1>Lista de juegos favoritos de '.$nombreUsuario.'</h1></span>';
+		if(sizeof($array)>0){
+			foreach ($array as $key => $value){
+
+				$foto=$value->Id_Juego;
+				$juegosFavoritos=$juegosFavoritos.'<div id="juego"><img class="juego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.
+				$foto .'/header.jpg?t='.$value->Imagen.'" /></div>';
+ 			}
 		}else{
-			$juegosFavoritos="No tienes juegos favoritos";
+			$juegosFavoritos=$juegosFavoritos."No tienes juegos favoritos";
 		}
 		$html = replace_content('/\#FAVORITOS\#/ms',$juegosFavoritos,$html);
 		//var_dump($arrayFavorito);
-		//$usuario1->mostrar($arrayFavorito);
 		#SACAR LA BIBLIOTECA
-		$tabla="biblioteca";
-		$sentencia='SELECT j.Nombre,j.Imagen,j.Id_Juego FROM biblioteca b,usuario u,juego j 
-			WHERE b.Id_Usuario=u.Id_Usuario 
-			AND j.Id_Juego=b.Id_Juego 
-			AND u.Nombre="' . $nombreUsuario. '"';
-		if($usuario1->consulta($sentencia)){
-			$resultado=$usuario1->consulta($sentencia);
-			while($objeto=mysqli_fetch_object($resultado)){
-				$arrayBiblio[]=$objeto;
-			}
+		$array=$usuario1->bibliotecaPerfil();
+		$juegosBiblioteca='<span id="mensajeSeccion"><h1>Biblioteca de '.$nombreUsuario.'</h1></span>';
+		if(sizeof($array)>0){
+			foreach ($array as $key => $value){
+
+				$foto=$value->Id_Juego;
+				$juegosBiblioteca=$juegosBiblioteca.'<div id="juego"><img class="juego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.
+				$foto .'/header.jpg?t='.$value->Imagen.'" /></div>';
+ 			}
 		}else{
-			$juegosBiblioteca="No tienes juegos en la biblioteca";
+			$juegosBiblioteca=$juegosBiblioteca."No tienes juegos en la biblioteca";
 		}
+		//var_dump($juegosBiblioteca);
 		$html = replace_content('/\#BIBLIOTECA\#/ms',$juegosBiblioteca,$html);
 		//$usuario1->mostrar($arrayBiblio);
-		$sentencia='SELECT j.Nombre,j.Imagen,j.Id_Juego FROM videos b,usuario u,juego j 
-			WHERE b.Id_Usuario=u.Id_Usuario 
-			AND j.Id_Juego=b.Id_Juego 
-			AND u.Nombre="' . $nombreUsuario. '"';
-		if($usuario1->consulta($sentencia)){
-			$resultado=$usuario1->consulta($sentencia);
-			while($objeto=mysqli_fetch_object($resultado)){
-				$arrayVideos[]=$objeto;
-			}
+		$array=$usuario1->videosPerfil();
+		$videos='<span id="mensajeSeccion"><h1>Videos de '.$nombreUsuario.'</h1></span>';
+		if(sizeof($array)>0){
+			foreach ($array as $key => $value){
+				$foto=$value->Id_Juego;
+				$videos=$videosa.'<div id="juego"><img class="juego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.
+				$foto .'/header.jpg?t='.$value->Imagen.'" /></div>';
+ 			}
 		}else{
-			$videos="No tienes videos";
+			$videos=$videos."No tienes videos";
 		}
 		$html = replace_content('/\#VIDEOS\#/ms',$videos,$html);
 		replace_page($css,$logo,$sesion,$html,$pagina);
 	}
 
 	function registrarse(){
-		//session_unset($usuario1);
-		//error_reporting(0);
+		error_reporting(0);
 		$pagina=load_template('Digital Games - Inicio Sesión');
-   		$css = load_page('app/views/default/modules/m.estiloConectarse.php');
+		session_start(); 
+		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
+		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
+		}else{   
+		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
+		}
+		$css = load_page('app/views/default/modules/m.estiloConectarse.php');
    		$logo = load_page('app/views/default/modules/m.logo.php');
    		$usuario1=new Usuario;
-   		//$usuario1->registrar();
-		#SACAR LOS FAVORITOS
-		$tabla="favoritos";
-		//$usuario1->datosPerfil();
+   		#SACAR LOS FAVORITOS
+		$usuario1->datosPerfil();
 		//var_dump($usuario1);
-		//$nombreUsuario=$_SESSION["nombreusuario"];
-		/*$sentencia='SELECT j.Nombre,j.Imagen,j.Id_Juego FROM favoritos f,usuario u,juego j 
-			WHERE f.Id_Usuario=u.Id_Usuario 
-			AND j.Id_Juego=f.Id_Juego 
-			AND u.Nombre="' . $nombreUsuario. '"';
-		if($usuario1->consulta($sentencia)){
-			$resultado=$usuario1->consulta($sentencia);
-			while($objeto=mysqli_fetch_object($resultado)){
-				$arrayFavorito[]=$objeto;
-			}
-		}*/
-		//$usuario1->mostrar($arrayFavorito);
+		$nombreUsuario=$_SESSION["nombreusuario"];
 		$html = load_page('app/views/default/modules/m.inicioSesion.php');
 		replace_page($css,$logo,$sesion,$html,$pagina);
+		return $_SESSION;
 	}
 
 	function paginaJuego(){
@@ -240,6 +271,12 @@ class mvc_controller {
 			$NombreJuego = $juego[0]->Nombre;
 	    }
 		$pagina=load_template('Digital Games - '.$NombreJuego);
+		session_start(); 
+		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
+		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
+		}else{   
+		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
+		}
    		$css = load_page('app/views/default/modules/m.estiloJuego.php');
    		$logo = load_page('app/views/default/modules/m.logoJuego.php');	
    		$imagen = '<img src="http://cdn.akamai.steamstatic.com/steam/apps/'.$juego[0]->Id_Juego.'/header.jpg?t='.$juego[0]->Imagen.'" id="caratula" alt="caratula">';

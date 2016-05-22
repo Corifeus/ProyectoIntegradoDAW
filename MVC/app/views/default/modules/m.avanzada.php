@@ -3,7 +3,7 @@
 		<p class="precio">
 	
 			PRECIO MAXIMO:
-			<input  id="precmin" type="number" name="precioMax" min="0" step="5" value="0">  €
+			<input  id="precmin" type="number" name="precioMax" min="0" step="5" value="20">  €
 					
 		</p>
 		<p>

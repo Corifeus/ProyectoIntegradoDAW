@@ -2,8 +2,7 @@
 require_once("db.class.php");
 class Usuario extends Database {
 	function registrar(){
-		if($c=$this->conectar()){
-			$tabla="usuario";
+		if($this->conectar()){
 			$nombre=$_POST['nombre_usuario'];
 			$contrasenya=md5($_POST['contrasenya']);
 			$email=$_POST['email'];
@@ -22,13 +21,13 @@ class Usuario extends Database {
 			$_SESSION=$_POST;
 
 			//echo "$nombre---------$contrasenya----------- $email--------- $idsteam------- $privacidad";
-/****** Programación mediante procesos ***********/
-			$sentencia="INSERT INTO $tabla (Nombre,Contrasenya,Email,Id_Steam,Privacidad,Administrador) VALUES
+			/****** Programación mediante procesos ***********/
+			$sentencia="INSERT INTO usuario (Nombre,Contrasenya,Email,Id_Steam,Privacidad,Administrador) VALUES
 				('$nombre','$contrasenya','$email','$idsteam','$privacidad','No')";
-			//print $sentencia;
-			//var_dump($_POST);
-			//var_dump($_SESSION);
+			print $sentencia;
 			if($this->consulta($sentencia)){
+				//var_dump($_SESSION);
+				$this->desconectar();
 				$this->login();
 			}else{
  				print "<br>Se ha producido un error al registrarse en la base de datos<br>";
@@ -47,6 +46,7 @@ class Usuario extends Database {
 			$nombre=$_POST['nombre'];
 			$contrasenya=md5($_POST['contrasenya']);
 			$sentencia="SELECT * FROM $tabla WHERE Nombre='$nombre' AND Contrasenya='$contrasenya'";
+			//var_dump($sentencia);
 			if($this->consulta($sentencia)){
 				//echo "Sentencia correcta";
 				$resultado=$this->consulta($sentencia);
@@ -60,6 +60,7 @@ class Usuario extends Database {
 					$_SESSION["foto"]=$objeto->Foto;
 					$_SESSION["Privacidad"]=$objeto->Privacidad;
 					$_SESSION["Administrador"]=$objeto->Administrador;
+					$_SESSION['estado'] = 'Logueado'; 
 						/*
 						ob_start();
 						echo 'espere mientras le redireccionamos a su página de inicio...';
@@ -75,25 +76,14 @@ class Usuario extends Database {
 							}
 							*/
 			
-		$this->desconectar();
-	
+			$this->desconectar();
 		}else{
  			echo "Error al conectar con la base de datos";
 		}
 
 	}
 	}
-	function insertarFotoPerfil(){
-		$this->conectar();
-		$sql="INSERT INTO usuarios VALUES ('$foto')";
-		if($this->consulta($sql)){
-			$this->desconectar();
-			return true;
-		}else{
-			$this->desconectar();
-			return false;
-		}
-	}
+
 
 	function datosPerfil(){
 		//session_start();
@@ -124,22 +114,9 @@ class Usuario extends Database {
 		}*/
 	}
 
-	function mostrar($array){
-		if(sizeof($array)>0){
-			foreach ($array as $key => $value){
-			error_reporting(0);
-		
-			$foto=$value->Id_Juego;
-			echo '<div><img class="juego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.
-			$foto .'/header.jpg?t='.$foto['Imagen'].'" /></div>';
- 			}
-		}  
-	}
-
-	function juegosPerfil(){
+	function favoritosPerfil(){
 		$this->conectar();
 		#SACAR LOS FAVORITOS
-		$tabla="favoritos";
 		$nombreUsuario=$_SESSION["nombreusuario"];
 		$sentencia='SELECT j.Nombre,j.Imagen,j.Id_Juego FROM favoritos f,usuario u,juego j 
 			WHERE f.Id_Usuario=u.Id_Usuario 
@@ -151,11 +128,13 @@ class Usuario extends Database {
 				$arrayFavorito[]=$objeto;
 			}
 		}
-		echo '<span id="mensajeSeccion"><h1>Lista de juegos favoritos de '.$nombreUsuario.'</h1></span>';
-		$this->mostrar($arrayFavorito);
+		$this->desconectar();
+		return $arrayFavorito;
+	}
 
+	function bibliotecaPerfil(){
 		#SACAR LA BIBLIOTECA
-		$tabla="biblioteca";
+		$this->conectar();
 		$nombreUsuario=$_SESSION["nombreusuario"];
 		$sentencia='SELECT j.Nombre,j.Imagen,j.Id_Juego FROM biblioteca b,usuario u,juego j 
 			WHERE b.Id_Usuario=u.Id_Usuario 
@@ -167,9 +146,27 @@ class Usuario extends Database {
 						$arrayBiblio[]=$objeto;
 			}
 		}
-		echo '<span id="mensajeSeccion"><h1>Biblioteca de '.$nombreUsuario.'</h1></span>';
-		$this->mostrar($arrayBiblio);
-		echo '<span id="mensajeSeccion"><h1>Vídeos de '.$nombreUsuario.'</h1></span>';
+		//var_dump($arrayBiblio);
+		$this->desconectar();
+		return $arrayBiblio;
+	}
+
+	function videosPerfil(){
+		$this->conectar();
+		#SACAR LOS FAVORITOS
+		$nombreUsuario=$_SESSION["nombreusuario"];
+		$sentencia='SELECT j.Nombre,j.Imagen,j.Id_Juego FROM videos v,usuario u,juego j 
+			WHERE v.Id_Usuario=u.Id_Usuario 
+			AND j.Id_Juego=v.Id_Juego 
+			AND u.Nombre="' . $nombreUsuario. '"';
+		if($this->consulta($sentencia)){
+			$resultado=$this->consulta($sentencia);
+			while($objeto=mysqli_fetch_object($resultado)){
+				$arrayVideos[]=$objeto;
+			}
+		}
+		$this->desconectar();
+		return $arrayVideos;
 	}
 		
 }

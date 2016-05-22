@@ -14,7 +14,7 @@
 	else if( $_GET['action'] == 'perfil' ){
 			$mvc->perfil();	
 	}
-	else if( $_GET['action'] == 'conectarse' ){
+	else if( $_GET['action'] == 'registrarse' ){
 			$mvc->registrarse();	
 	}
 	else if( $_GET['action'] == 'avanzada' ){

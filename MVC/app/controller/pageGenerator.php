@@ -17,8 +17,8 @@
 	function replace_page($css,$logo,$sesion,$contenido,$pagina){
 		$pagina = replace_content('/\#CSS\#/ms' ,$css , $pagina);
 		$pagina = replace_content('/\#LOGO\#/ms' ,$logo , $pagina);
-		var_dump($_SESSION);
-		if(isset($_SESSION['Id_Usuario'])&&($_SESSION['Id_Usuario'])!=null){
+		//var_dump($_SESSION);
+		if(isset($_SESSION)){
 			$sesion = load_page('app/views/default/modules/m.menuPerfil.php');
 		}else{
 			$sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
@@ -28,10 +28,7 @@
 		view_page($pagina);
 	}
 
-
-
-
 	function replace_content($in='/\#CONTENIDO\#/ms', $out,$pagina){
 		 return preg_replace($in, $out, $pagina);	 	
 	}
-	?>
+?>
