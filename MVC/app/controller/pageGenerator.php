@@ -15,16 +15,24 @@
 	}
 
 	function replace_page($css,$logo,$sesion,$contenido,$pagina){
+		error_reporting(0);
 		$pagina = replace_content('/\#CSS\#/ms' ,$css , $pagina);
 		$pagina = replace_content('/\#LOGO\#/ms' ,$logo , $pagina);
-		//var_dump($_SESSION);
-		if(isset($_SESSION)){
-			$sesion = load_page('app/views/default/modules/m.menuPerfil.php');
-		}else{
-			$sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
+		//echo session_name();
+		session_start();
+		$nombreUsuario=$_SESSION['nombreusuario'];
+		//var_dump($nombreUsuario);
+		$logo = replace_content('/\#NOMBREUSUARIO\#/ms',$nombreUsuario,$logo);
+		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
+		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
+		      //echo "Con sesión";
+		}else{   
+		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
+		      //echo "Sin sesión";
 		}
 		$pagina = replace_content('/\#SESION\#/ms' ,$sesion , $pagina);		
 		$pagina = replace_content('/\#CONTENIDO\#/ms' ,$contenido , $pagina);	
+		$pagina = replace_content('/\#NOMBREUSUARIO\#/ms',$nombreUsuario,$pagina);
 		view_page($pagina);
 	}
 

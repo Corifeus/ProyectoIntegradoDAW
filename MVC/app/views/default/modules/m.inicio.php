@@ -1,17 +1,17 @@
 
 <div id="slider">
-			
+		
 			<figure>
-				
+
 				#JUEGO4#
 				#JUEGO5#
 				#JUEGO6#
 				#JUEGO7#
-				#JUEGO8#
-			
+				#JUEGO4#
+
 			</figure>
 
-		</div>
+</div>
 
 		<div id="juegos">
 

@@ -49,8 +49,6 @@ div#slider figure {
 }
 
 
-
-
 /* PRECIOS JUEGOS */
 
 #juegos{
@@ -105,13 +103,13 @@ div#slider figure {
   
   .juego{
 
-    width: 40vh;
+    width: 35vh;
   }
 
   .imgJuego{
 
-    width: 40vh;
-    height:170px;
+    width: 35vh;
+    height:150px;
   }
 }
 

@@ -9,13 +9,7 @@ class mvc_controller {
  
 	function principal(){
    		$pagina=load_template('Digital Games - Inicio');
-   		session_start(); 
-		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
-		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
-		}else{   
-		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
-		}
-   		//var_dump($_SESSION);
+
    		$css = load_page('app/views/default/modules/m.estiloInicio.php');
    		$logo = load_page('app/views/default/modules/m.logo.php');
 		$html = load_page('app/views/default/modules/m.inicio.php');
@@ -49,12 +43,7 @@ class mvc_controller {
 
 	function genero(){
 		$pagina=load_template('Digital Games - Géneros');
-		session_start(); 
-		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
-		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
-		}else{   
-		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
-		}
+		
 	   	$css = load_page('app/views/default/modules/m.estiloGenero.php');
 	   	$logo = load_page('app/views/default/modules/m.logo.php');
 	   	$html = load_page('app/views/default/modules/m.genero.php');
@@ -115,13 +104,7 @@ class mvc_controller {
 
 	function buscador(){
 		$pagina=load_template('Digital Games - Busqueda');
-		session_start(); 
-		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
-		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
-		}else{   
-		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
-		}
-   		$css = load_page('app/views/default/modules/m.estiloBusqueda.php');
+		$css = load_page('app/views/default/modules/m.estiloBusqueda.php');
    		$logo = load_page('app/views/default/modules/m.logo.php');
 		$html = load_page('app/views/default/modules/m.avanzada.php');
 		replace_page($css,$logo,$sesion,$html,$pagina);
@@ -129,12 +112,7 @@ class mvc_controller {
 
 	function resultadoBusqueda(){
 		$pagina=load_template('Digital Games - Resultado Busqueda');
-		session_start(); 
-		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
-		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
-		}else{   
-		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
-		}
+	    $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
    		$css = load_page('app/views/default/modules/m.estiloBusqueda.php');
    		$logo = load_page('app/views/default/modules/m.logo.php');
 		$html = load_page('app/views/default/modules/m.resultadoBusqueda.php');
@@ -180,22 +158,15 @@ class mvc_controller {
 	function perfil(){
 		error_reporting(0);
 		$pagina=load_template('Digital Games - Perfil');
-		session_start(); 
-		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
-		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
-		}else{   
-		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
-		}
+		
    		$css = load_page('app/views/default/modules/m.estiloPerfil.php');
    		$logo = load_page('app/views/default/modules/m.logoPerfil.php');
    		$usuario1=new Usuario;
 		$usuario1->login();
 		$usuario1->datosPerfil();
-		//var_dump($_SESSION);
+		session_start();
 		$nombreUsuario=$_SESSION['nombreusuario'];
-   		$logo = replace_content('/\#NOMBREUSUARIO\#/ms',$nombreUsuario,$logo);
    		$html = load_page('app/views/default/modules/m.perfil.php');
-   		//$html = replace_content('/\#NOMBREUSUARIO\#/ms',$nombreUsuario,$html);
    		//SACAR LOS FAVORITOS
    		$array=$usuario1->favoritosPerfil();
    		$juegosFavoritos='<span id="mensajeSeccion"><h1>Lista de juegos favoritos de '.$nombreUsuario.'</h1></span>';
@@ -238,6 +209,7 @@ class mvc_controller {
 		}else{
 			$videos=$videos."No tienes videos";
 		}
+		$array=$usuario1->actualizar();
 		$html = replace_content('/\#VIDEOS\#/ms',$videos,$html);
 		replace_page($css,$logo,$sesion,$html,$pagina);
 	}
@@ -245,12 +217,7 @@ class mvc_controller {
 	function registrarse(){
 		error_reporting(0);
 		$pagina=load_template('Digital Games - Inicio Sesión');
-		session_start(); 
-		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
-		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
-		}else{   
-		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
-		}
+		
 		$css = load_page('app/views/default/modules/m.estiloConectarse.php');
    		$logo = load_page('app/views/default/modules/m.logo.php');
    		$usuario1=new Usuario;
@@ -271,12 +238,7 @@ class mvc_controller {
 			$NombreJuego = $juego[0]->Nombre;
 	    }
 		$pagina=load_template('Digital Games - '.$NombreJuego);
-		session_start(); 
-		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
-		      $sesion = load_page('app/views/default/modules/m.menuPerfil.php');
-		}else{   
-		      $sesion = load_page('app/views/default/modules/m.menuInicioSesion.php');
-		}
+		
    		$css = load_page('app/views/default/modules/m.estiloJuego.php');
    		$logo = load_page('app/views/default/modules/m.logoJuego.php');	
    		$imagen = '<img src="http://cdn.akamai.steamstatic.com/steam/apps/'.$juego[0]->Id_Juego.'/header.jpg?t='.$juego[0]->Imagen.'" id="caratula" alt="caratula">';

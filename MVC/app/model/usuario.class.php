@@ -61,33 +61,21 @@ class Usuario extends Database {
 					$_SESSION["Privacidad"]=$objeto->Privacidad;
 					$_SESSION["Administrador"]=$objeto->Administrador;
 					$_SESSION['estado'] = 'Logueado'; 
-						/*
-						ob_start();
-						echo 'espere mientras le redireccionamos a su página de inicio...';
-						header('refresh 0; url=../htmlCSS/Inicio.php');
-						ob_end_flush();
-						*/
-					sleep(0);
-   					//header ("Location: index.php?action=perfil");
-					//var_dump($_SESSION);
-	 		 	}
- 		 	/*if ($_SESSION["Privacidad"]=='') {
-								echo "El nombre de usuario o la contraseña son incorrectos";
-							}
-							*/
-			
-			$this->desconectar();
-		}else{
- 			echo "Error al conectar con la base de datos";
-		}
 
-	}
+					sleep(0);
+					//var_dump($_SESSION);
+			 	}
+			$this->desconectar();
+			}else{
+	 			echo "Error al conectar con la base de datos";
+			}
+
+		}
 	}
 
 
 	function datosPerfil(){
 		//session_start();
-		
 		if($_SESSION["nombreusuario"]==false){
 			sleep(0);
 			//header ("Location: index.php?action=conectarse");
@@ -98,20 +86,12 @@ class Usuario extends Database {
 			WHERE f.Id_Usuario=u.Id_Usuario 
 			AND j.Id_Juego=f.Id_Juego 
 			AND u.Nombre="' . $nombreUsuario. '"';
-			if($this->consulta($sentencia)){
-				$resultado=$this->consulta($sentencia);
-				while($objeto=mysqli_fetch_object($resultado)){
-					$arrayFavorito[]=$objeto;
-				}
+		if($this->consulta($sentencia)){
+			$resultado=$this->consulta($sentencia);
+			while($objeto=mysqli_fetch_object($resultado)){
+				$arrayFavorito[]=$objeto;
 			}
-		/*if ($_SESSION["Privacidad"]=="Si") {
-			echo '<div class="nick2">';
-			echo  "Email:  " . $_SESSION["email"];
-			echo '</div>';
-			echo '<div class="nick2">';
-			echo "Id-Steam:  " . $_SESSION["idsteam"];
-			echo '</div>';
-		}*/
+		}
 	}
 
 	function favoritosPerfil(){
