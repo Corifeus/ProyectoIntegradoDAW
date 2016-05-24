@@ -2,7 +2,7 @@
 
 body { 
 
-  background-image: url("http://localhost/MVC/app/views/default/images/precio1.jpg");
+  background-image: url("http://localhost/MVC/app/views/default/images/juego.jpg");
   background-repeat: no-repeat;
   background-size:cover;
   background-position: center center;
@@ -99,6 +99,7 @@ input[type = "radio"]:checked ~ label{color:#F6511D;}
 #descripcionJuego{
 
   margin-top: 25px;
+  width: 260px;
 }
 
 #infoJuego{

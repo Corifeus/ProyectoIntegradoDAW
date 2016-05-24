@@ -21,8 +21,14 @@
   					<label for="radio5">&#9733;</label>
   					</p>
 
+            <div id="boton">
 
+
+              #BOTONES#
+
+
+            </div>
 
 				</div>
 
-			</div>
+</div>

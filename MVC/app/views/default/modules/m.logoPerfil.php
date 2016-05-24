@@ -14,7 +14,7 @@
 			
 		<form action="index.php?action=registrarse" method="post" id="boton">
         		
-        	<button type="submit" neme"sesion" value="logout"> CERRAR SESION </button>
+        	<button type="submit" name"sesion" value="logout"> CERRAR SESION </button>
 
     	</form>
 

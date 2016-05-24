@@ -122,6 +122,21 @@ class Juego extends Database{
 		}
 	}	
 	
+	function favoritos($id,$sesion){
+		if($this->conectar()){
+			$sentencia='INSERT INTO favoritos(Id_Juego,Id_Usuario) VALUES ('.$id.','.$sesion.')';
+			//var_dump($sentencia);
+			$this->consulta($sentencia);
+		}
+	}
+
+	function biblioteca($id,$sesion){
+		if($this->conectar()){
+			$sentencia='INSERT INTO biblioteca(Id_Juego,Id_Usuario) VALUES ('.$id.','.$sesion.')';
+			//var_dump($sentencia);
+			$this->consulta($sentencia);
+		}
+	}
 }
 
 ?>

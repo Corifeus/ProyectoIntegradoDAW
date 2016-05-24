@@ -278,21 +278,47 @@ class mvc_controller {
 	}
 
 	function paginaJuego(){
+		session_start();
 		$juego1= new Juego;
+		$user1= new Usuario;
 		$juego=$juego1->mostrarDatos();
 		if($juego!=''){
 	    	$NombreJuego = ob_get_clean();	
 			$NombreJuego = $juego[0]->Nombre;
 	    }
 		$pagina=load_template('Digital Games - '.$NombreJuego);
-		
    		$css = load_page('app/views/default/modules/m.estiloJuego.php');
-   		$logo = load_page('app/views/default/modules/m.logoJuego.php');	
+   		if(isset($_SESSION['nombreusuario']) and $_SESSION['estado'] == 'Logueado') { 
+		      $logo = load_page('app/views/default/modules/m.logoJuegoSesion.php');	
+		      //echo "Con sesión";
+		}else{   
+		      $logo = load_page('app/views/default/modules/m.logoJuego.php');
+		      //echo "Sin sesión";
+		}
    		$imagen = '<img src="http://cdn.akamai.steamstatic.com/steam/apps/'.$juego[0]->Id_Juego.'/header.jpg?t='.$juego[0]->Imagen.'" id="caratula" alt="caratula">';
    		$precioSalida = $juego[0]->Precio_Original;
+   		$usuario=$user1->identificar();
+   		$botones='<form action="index.php?action=juego&id='.$_GET["id"].'&add=biblioteca" method="post" id="biblioteca">
+               <button type="submit" name"sesion" value="biblioteca"> AÑADIR A BIBLIOTECA </button>
+		      </form>
+		      <form action="index.php?action=juego&id='.$_GET["id"].'&add=favoritos" method="post" id="favoritos">
+        	  <button type="submit" name"sesion" value="favoritos"> AÑADIR A FAVORITOS </button>
+		      </form>';
+		//var_dump($_POST);  
+		//var_dump($_GET);   
+		//var_dump($usuario);
+		if($_GET['add']!=null){
+			//echo "añadiendo juego";
+			if($_GET['add']=="biblioteca"){
+				$juego1->biblioteca($_GET["id"],$usuario);
+			}elseif($_GET['add']=="favoritos"){
+				$juego1->favoritos($_GET["id"],$usuario);
+			}
+		}
 		$logo = replace_content('/\#IMAGEN\#/ms',$imagen,$logo);
 		$logo = replace_content('/\#NOMBRE\#/ms',$NombreJuego,$logo);
 		$logo = replace_content('/\#PRECIO\#/ms',$precioSalida,$logo);
+		$logo = replace_content('/\#BOTONES\#/ms',$botones,$logo);
 		$html = load_page('app/views/default/modules/m.juego.php');
 		//var_dump($juego[0]);
 		$informacion='';

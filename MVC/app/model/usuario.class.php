@@ -97,6 +97,23 @@ class Usuario extends Database {
 		}
 	}
 
+	function identificar(){
+		$this->conectar();
+		$sentencia='SELECT Id_Usuario FROM usuario WHERE Nombre = "'.$_SESSION["nombreusuario"].'"';
+		//var_dump($sentencia);
+		if($this->consulta($sentencia)){
+			$res=$this->consulta($sentencia);
+			$id=mysqli_fetch_object($res);
+			//var_dump($id);
+			return $id->Id_Usuario;
+			echo "Consulta realizada";
+		}else{
+			echo "Falla algo";
+		}
+	}
+
+
+
 	function favoritosPerfil(){
 		$this->conectar();
 		#SACAR LOS FAVORITOS
