@@ -73,6 +73,9 @@ class Usuario extends Database {
 		}
 	}
 
+	function logout(){
+		session_destroy();
+	}
 
 	function datosPerfil(){
 		//session_start();

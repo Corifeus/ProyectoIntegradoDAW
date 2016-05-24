@@ -1,0 +1,16 @@
+/* IMAGEN FONDO */
+
+body { 
+
+    background-image: url("http://localhost/MVC/app/views/default/images/casual.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center center;
+    background-attachment: fixed;
+
+
+}
+
+
+
+

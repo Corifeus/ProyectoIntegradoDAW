@@ -40,7 +40,71 @@ header{
 	margin-bottom: 25px;
 }
 
+#nick{
 
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	margin-bottom: 10px;
+
+}
+
+
+
+/* BOTÓN */
+
+#boton input {
+
+	width: 138px;
+	height: 20px;
+	float: left;
+	font-size: 15px;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	border: 0;
+	background: #EEE;
+
+}
+ 
+ 
+#boton button {
+	
+	overflow: visible;
+	position: absolute;
+
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	height: 40px;
+	width: 150px;
+	font-size: 15px;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	color: white;
+	text-transform: uppercase;
+	background: #F6511D;
+
+
+}
+   
+#boton button:hover{     
+    
+    background: #00A6ED;
+}   
+   
+#boton button:active, #boton button:focus{   
+    
+    background: #F6511D;
+    outline: 0;   
+}
+  
+#biblioteca{
+	display: block;
+	float: left;
+}
+
+#favoritos{
+	clear:both;
+	display: block-inline;
+	float: right;
+	text-align: right;
+}
 
 
 /* BUSCADOR */

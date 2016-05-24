@@ -21,6 +21,23 @@
   					<label for="radio5">&#9733;</label>
   					</p>
 
+  <div id="boton">
+
+
+    <form action="index.php?action=registrarse" method="post" id="biblioteca">
+            
+          <button type="submit" neme"sesion" value="logout"> AÑADIR A LA BIBLIOTECA </button>
+
+      </form>
+
+      <form action="index.php?action=registrarse" method="post" id="biblioteca">
+            
+          <button type="submit" neme"sesion" value="logout"> AÑADIR A FAVORITOS </button>
+
+      </form>
+
+
+  </div>
 
 				</div>
 

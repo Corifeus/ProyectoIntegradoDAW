@@ -49,8 +49,52 @@ class mvc_controller {
 	   	$html = load_page('app/views/default/modules/m.genero.php');
 	   	$genero1=new Genero;
 		if(isset($_GET['id'])){
+			switch ($_GET['id']) {
+				case 1:
+					$css = load_page('app/views/default/modules/m.estiloAccion.php');
+					break;
+				case 2:
+					$css = load_page('app/views/default/modules/m.estiloAventura.php');
+					break;
+				case 3:
+					$css = load_page('app/views/default/modules/m.estiloCasual.php');
+					break;
+				case 4:
+					$css = load_page('app/views/default/modules/m.estiloMultijugador.php');
+					break;
+				case 5:
+					$css = load_page('app/views/default/modules/m.estiloGratuito.php');
+					break;
+				case 6:
+					$css = load_page('app/views/default/modules/m.estiloIndie.php');
+					break;
+				case 7:
+					$css = load_page('app/views/default/modules/m.estiloMultijugador.php');
+					break;
+				case 8:
+					$css = load_page('app/views/default/modules/m.estiloCarreras.php');
+					break;
+				case 9:
+					$css = load_page('app/views/default/modules/m.estiloSimulacion.php');
+					break;
+				case 10:
+					$css = load_page('app/views/default/modules/m.estiloRol.php');
+					break;
+				case 11:
+					$css = load_page('app/views/default/modules/m.estiloSimulacion.php');
+					break;
+				case 12:
+					$css = load_page('app/views/default/modules/m.estiloSimulacion.php');
+					break;
+				case 13:
+					$css = load_page('app/views/default/modules/m.estiloDeportes.php');
+					break;
+				default:
+					
+					break;
+			}
 			$arrayJuego=$genero1->buscarGenero();
-			$generos='<div class="fila">';
+			$generos='<div><a href="index.php?action=genero&id='.$lista[$i-1]->Id_Genero.'"><p>'.$lista[$i-1]->Nombre.'</p></a></div><div id="juegos"><div class="fila">';
 			$j=1;
 			//var_dump($arrayJuego);
 			if($arrayJuego!=''){
@@ -209,13 +253,16 @@ class mvc_controller {
 		}else{
 			$videos=$videos."No tienes videos";
 		}
-		$array=$usuario1->actualizar();
+		//$array=$usuario1->actualizar();
 		$html = replace_content('/\#VIDEOS\#/ms',$videos,$html);
 		replace_page($css,$logo,$sesion,$html,$pagina);
 	}
 
 	function registrarse(){
+		session_start();
+		session_destroy();
 		error_reporting(0);
+
 		$pagina=load_template('Digital Games - Inicio Sesión');
 		
 		$css = load_page('app/views/default/modules/m.estiloConectarse.php');
