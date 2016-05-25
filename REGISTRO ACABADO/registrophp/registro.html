@@ -1,0 +1,167 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="registro.css">
+	</head>
+	<body>
+
+
+    	<div id="header">
+    		
+    		<button id="inicio"> Iniciar sesion </button>
+
+    		<img src="logotipo.png" id="logotipo"></img>
+
+    	</div>  
+
+    	<div id="barra">
+      
+    		<span class="menu"> <p> INICIO </p> </span> 
+
+    		<span class="menu"> <p> BUSQUEDA </p> </span>
+
+    		<span class="menu"> <p> PERFIL </p> </span>
+
+  		</div>
+
+
+
+
+<form class="form-horizontal" action="procesarRegistrar.php" method="post">
+	<fieldset>
+	<legend>REGISTRO</legend>
+		<div id="formulario">
+
+	<div class="control-group ">
+		<label class="control-label" ="nombre" id="elprimero">Nombre usuario</label>
+		<div class="controls">
+    		<input type="text" id="user_name" name="nombre_usuario" required="required" placeholder="Nombre usuario" maxlength="40" value="">
+
+	</div>
+	</div>
+
+
+	<div class="control-group ">
+		<label class="control-label" ="contrasenya">Contraseña</label>
+		<div class="controls">
+    		<input type="password" id="form_name" name="contrasenya" required="required" placeholder="Contraseña" maxlength="40" value="">
+		</div>
+	</div>
+
+
+
+
+	<div class="control-group ">
+		<label class="control-label" for="apellidos">Email</label>
+		<div class="controls">
+    		<input type="text" id="form_subnombre" name="email" required="required" placeholder="Email" maxlength="80" value="">
+		</div>
+	</div>
+
+
+
+
+
+	<div class="control-group ">
+		<label class="control-label" for="telefono">Id-Steam</label>
+		<div class="controls">
+    		<input type="text" id="form_movil" name="idsteam" placeholder="Id-Steam" value="">
+    				</div>
+	</div>
+
+
+
+
+	<div class="control-group ">
+		<label class="control-label" for="email">Foto</label>
+		<div class="controls">
+    		<input type="file" id="form_mail" name="foto" placeholder="Dirección de correo" maxlength="50" value="">
+    		    	</div>
+	</div>
+	
+
+
+
+	<div class="control-group ">
+		<label class="control-label" for="privacidad">Privacidad</label>
+		<div class="controls">
+    		<input type="radio" id="form_movil" name="privacidad" value="Si">Si
+    		<input type="radio" id="form_movil" name="privacidad" value="No">No
+    				</div>
+	</div>
+	
+
+
+
+	<!--<div class="control-group ">
+		<label class="control-label" for="cp">Código Postal</label>
+		<div class="controls">
+    		<input type="text" id="form_cp" name="form[cp]" required="required" placeholder="Codigo Postal" value="" maxlength="10">
+		</div>
+				
+	</div>
+	<div class="control-group ">
+		<label class="control-label" for="poblacion">Población</label>
+		<div class="controls">
+    		<input type="text" id="form_city" name="form[city]" required="required" placeholder="Cidudad" value="" maxlength="40">
+		</div>
+	</div>
+	<div class="control-group ">
+		<label class="control-label" for="provincia">Provincia</label>
+		<div class="controls">
+    		<input type="text" id="form_provincia" name="form[provincia]" required="required" placeholder="Provincia" value="" maxlength="40">
+		</div>
+	</div>-->
+	<!--
+	<div class="control-group">
+		<label class="control-label" for="sexo">Sexo</label>
+		<div class="controls">
+		<select id="form_gender" name="form[gender]"><option value="">Selecciona tu sexo</option><option value="H">Hombre</option><option value="M">Mujer</option></select>
+		</div>
+	</div>
+	
+	
+	
+	<div class="control-group">
+		<label class="control-label" for="birthday">Fecha de nacimiento</label>
+		<div class="controls">
+			<div id="form_birthday"><input type="date" name="FechaNac" step=1 min="1900-01-01" max="2017-12-37" value="1900-01-01"></div>
+		</div>
+	</div>
+	
+
+	<div class="control-group ">
+		<label class="control-label" for="password">Contraseña</label>
+		<div class="controls">
+			<input type="password" id="form_pwd" name="form[pwd]" required="required" placeholder="Contraseña">
+					</div>
+	</div>
+	
+	<div class="control-group ">
+		<label class="control-label" for="password2">Repetir contraseña</label>
+		<div class="controls">
+			<input type="password" name="form[pwd2]" placeholder="Repetir contraseña" required="">
+					</div>
+	</div>
+
+	<div class="control-group ">
+		<label class="control-label" ="nombre">Id Steam</label>
+		<div class="controls">
+    		<input type="text" id="is_steam" name="form[steam]" required="required" placeholder="ID Steam" maxlength="40" value="">
+		</div>
+	
+	-->
+	<div class="control-group">
+		<div class="controls">
+			<button type="submit" id="enviar" class="btn btn-info">Registrarse</button>
+		</div>
+	</div>
+	</div>
+	</div>
+
+	</fieldset>
+	
+</form>
+
+</body>
+</html>
