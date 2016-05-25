@@ -7,7 +7,7 @@
     	<title>#TITULO#</title>
 		
 		#CSS#
-
+		
 	</head>
 
 	<body>
@@ -87,14 +87,19 @@
 
 			<div id="redes">
 			
-			<img src="app/views/default/images/tienda1.png" alt="twitter" class="imgFooter">
+				<a href="http://store.steampowered.com/">
+					<img src="app/views/default/images/tienda1.png" alt="twitter" class="imgFooter">
+				</a>
+				<a href="http://www.gamersgate.com/">
+					<img src="app/views/default/images/tienda2.png" alt="twitter" class="imgFooter">
+				</a>
+				<a href="http://www.funstockdigital.co.uk/">
+					<img src="app/views/default/images/tienda3.png" alt="facebook" class="imgFooter">
+				</a>
+				<a href="https://www.gamesrocket.es/">
+					<img src="app/views/default/images/tienda4.png" alt="facebook" class="imgFooter">
+				</a>
 
-			<img src="app/views/default/images/tienda2.png" alt="twitter" class="imgFooter">
-
-			<img src="app/views/default/images/tienda3.png" alt="facebook" class="imgFooter">
-
-			<img src="app/views/default/images/tienda4.png" alt="facebook" class="imgFooter">
-			
 			</div>
 
 			</div>

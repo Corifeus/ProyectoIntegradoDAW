@@ -28,6 +28,29 @@ class Administrador extends Juego{
 					}
 				}
 				//Insertar el trigger
+				$trigger='DELIMITER$$
+						CREATE TRIGGER historico
+						AFTER UPDATE ON producto
+						FOR EACH ROW
+						BEGIN 
+							DECLARE precio_historico FLOAT;
+							DECLARE fecha_historico DATE;
+							DECLARE id_historico INT;
+							SELECT Precio INTO precio_historico FROM historico_precios;
+							SELECT Fecha INTO fecha_historico FROM historico_precios;
+							SELECT Id_Juego INTO id_historico FROM historico_precios;
+							IF old.Id_Juego = id_historico AND CURTIME() = fecha_historico THEN
+								IF old.Precio < precios_historico THEN
+									UPDATE historico_precios SET Id_Juego = old.Id_Juego,
+																Fecha = CURTIME(),
+																Precio = old.Precio;
+								END IF
+							ELSE 
+								INSERT INTO historico_precios VALUES (old.Id_Juego, CURTIME(),old.Precio);
+							END IF
+							END;$$';
+				$this->consulta($trigger);		
+				//Actualizar juegos
 				$sentencia3="SELECT Id_Juego FROM juego";
 				$res=$this->consulta($sentencia3);
 				print "Se han obtenido $res->num_rows resultados en la consulta<br>";

@@ -51,6 +51,18 @@ header{
 
 /* BOTÓN */
 
+#actualizar input {
+
+	width: 130px;
+	height: 20px;
+	float: right;
+	font-size: 15px;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	border: 0;
+	background: #EEE;
+
+}
+
 #boton input {
 
 	width: 130px;
@@ -91,6 +103,8 @@ header{
     background: #F6511D;
     outline: 0;   
 }
+
+
   
 #biblioteca{
 	display: block;

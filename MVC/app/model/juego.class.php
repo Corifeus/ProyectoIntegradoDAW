@@ -4,7 +4,11 @@ class Juego extends Database{
 	function portada(){
 		if($c=$this->conectar()){
 			//var_dump($c);
-			$sentencia="SELECT * FROM `juego` WHERE `Fecha` IS NOT NULL AND `Fecha`<CURDATE() AND `Precio_Original`>0 ORDER BY `Fecha` DESC LIMIT 8";
+			$sentencia="SELECT * FROM `juego` 
+						WHERE `Fecha` IS NOT NULL AND `Fecha`<CURDATE() 
+						AND `Precio_Original`>0 
+						AND `Numero_Propietarios` > 100000 
+						ORDER BY `Fecha` DESC LIMIT 7";
 			if($this->consulta($sentencia)){
 				$resultado=$this->consulta($sentencia);
 				//var_dump($resultado);

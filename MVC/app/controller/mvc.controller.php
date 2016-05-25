@@ -94,7 +94,7 @@ class mvc_controller {
 					break;
 			}
 			$arrayJuego=$genero1->buscarGenero();
-			$generos='<div><a href="index.php?action=genero&id='.$lista[$i-1]->Id_Genero.'"><p>'.$lista[$i-1]->Nombre.'</p></a></div><div id="juegos"><div class="fila">';
+			$generos='<div><a href="index.php?action=genero&id='.$lista[$i-1]->Id_Genero.'"><p>'.$lista[$i-1]->Nombre.'</p></a></div><div class="juegos"><div class="fila">';
 			$j=1;
 			//var_dump($arrayJuego);
 			if($arrayJuego!=''){
@@ -103,7 +103,7 @@ class mvc_controller {
 					$generos=$generos.'<div class="juego">
 						<a href="index.php?action=juego&id='.$arrayJuego[$i]->Id_Juego.'">			
 						<img class="imgJuego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.$arrayJuego[$i]->Id_Juego.'/header.jpg?t='.$arrayJuego[$i]->Imagen.'">
-						<div class="nombrePrec">
+						<div>
 						<p>'. $arrayJuego[$i]->Nombre .'</p><p>Precio de Salida: '.$arrayJuego[$i]->Precio_Original.' €</p>
 						</div></a></div>';
 					if($j>($filas)){
@@ -132,7 +132,7 @@ class mvc_controller {
 					$juegos='<div class="juego">
 						<a href="index.php?action=juego&id='.$juego[$j]->Id_Juego.'">			
 						<img class="imgJuego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.$juego[$j]->Id_Juego.'/header.jpg?t='.$juego[$j]->Imagen.'" id="juego4">
-						<div class="nombrePrec">
+						<div>
 						<p>'. $juego[$j]->Nombre .'</p><p>Precio de Salida: '.$juego[$j]->Precio_Original.' €</p>
 						</div></a></div>';
 					$generos=$generos.$juegos;
@@ -172,14 +172,39 @@ class mvc_controller {
 		//
 		$encontrados='<div class="fila">';
 		$j=1;
-		//var_dump($arrayJuego);
 		if($arrayJuego!=''){
+			$filas=(sizeof($arrayJuego)/3)+1;
+			//echo $filas;
+			//var_dump(sizeof($arrayJuego));
+			for($i=0;$i<sizeof($arrayJuego);$i++){
+				$encontrados=$encontrados.'<div class="juego">
+						<a href="index.php?action=juego&id='.$arrayJuego[$i]->Id_Juego.'">			
+						<img class="imgJuego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.$arrayJuego[$i]->Id_Juego.'/header.jpg?t='.$arrayJuego[$i]->Imagen.'">
+						<div>
+						<p>'. $arrayJuego[$i]->Nombre .'</p><p>Precio de Salida: '.$arrayJuego[$i]->Precio_Original.' €</p>
+						</div></a></div>';
+					if($j>($filas-1)){
+						$encontrados=$encontrados.'</div><div class="fila">';
+						$j=1;
+					}else{
+						$j++;
+					}
+				}
+				$encontrados=$encontrados.'</div>';
+			}else{
+				$encontrados='<div class="juego"><p>No se han encontrado juegos</p><p></div>';
+			}
+		//
+		//$encontrados='<div class="fila">';
+		//$j=1;
+		//var_dump($arrayJuego);
+		/*if($arrayJuego!=''){
 			$filas=sizeof($arrayJuego)/3;
 			for($i=0;$i<sizeof($arrayJuego);$i++){
 				$encontrados=$encontrados.'<div class="juego">
 					<a href="index.php?action=juego&id='.$arrayJuego[$i]->Id_Juego.'">			
 					<img class="imgJuego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.$arrayJuego[$i]->Id_Juego.'/header.jpg?t='.$arrayJuego[$i]->Imagen.'">
-					<div class="nombrePrec">
+					<div>
 					<p>'. $arrayJuego[$i]->Nombre .'</p><p>Precio de Salida: '.$arrayJuego[$i]->Precio_Original.' €</p>
 					</div></a></div>';
 				if($j>($filas)){
@@ -193,7 +218,7 @@ class mvc_controller {
 			
 		}else{
 			$encontrados='<div class="juego"><p>No se han encontrado juegos</p><p></div>';
-		}
+		}*/
 		$reemplazo='/\#RESULTADOS\#/ms';
 		$html = replace_content($reemplazo,$encontrados,$html);	
 		replace_page($css,$logo,$sesion,$html,$pagina);
@@ -209,41 +234,48 @@ class mvc_controller {
 		$usuario1->login();
 		$usuario1->datosPerfil();
 		session_start();
+		if($_SESSION['administrador']=='Si'){
+			$logo = load_page('app/views/default/modules/m.logoAdministrador.php');
+		}else{
+			$logo = load_page('app/views/default/modules/m.logoPerfil.php');
+		}
 		$nombreUsuario=$_SESSION['nombreusuario'];
    		$html = load_page('app/views/default/modules/m.perfil.php');
    		//SACAR LOS FAVORITOS
    		$array=$usuario1->favoritosPerfil();
-   		$juegosFavoritos='<span id="mensajeSeccion"><h1>Lista de juegos favoritos de '.$nombreUsuario.'</h1></span>';
+   		$juegosFavoritos='<span class="mensajeSeccion"><h1>Lista de juegos favoritos de '.$nombreUsuario.'</h1></span>';
 		if(sizeof($array)>0){
 			foreach ($array as $key => $value){
 
 				$foto=$value->Id_Juego;
-				$juegosFavoritos=$juegosFavoritos.'<div id="juego"><img class="juego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.
-				$foto .'/header.jpg?t='.$value->Imagen.'" /></div>';
+				$juegosFavoritos=$juegosFavoritos.'<a href="index.php?action=juego&id='.$value->Id_Juego.'">
+				<div id="juego"><img class="juego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.
+				$foto .'/header.jpg?t='.$value->Imagen.'" /></div></a>';
  			}
 		}else{
-			$juegosFavoritos=$juegosFavoritos."No tienes juegos favoritos";
+			$juegosFavoritos=$juegosFavoritos.'<div class="mensaje">No tienes juegos favoritos</div>';
 		}
 		$html = replace_content('/\#FAVORITOS\#/ms',$juegosFavoritos,$html);
 		//var_dump($arrayFavorito);
 		#SACAR LA BIBLIOTECA
 		$array=$usuario1->bibliotecaPerfil();
-		$juegosBiblioteca='<span id="mensajeSeccion"><h1>Biblioteca de '.$nombreUsuario.'</h1></span>';
+		$juegosBiblioteca='<span class="mensajeSeccion"><h1>Biblioteca de '.$nombreUsuario.'</h1></span>';
 		if(sizeof($array)>0){
 			foreach ($array as $key => $value){
 
 				$foto=$value->Id_Juego;
-				$juegosBiblioteca=$juegosBiblioteca.'<div id="juego"><img class="juego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.
-				$foto .'/header.jpg?t='.$value->Imagen.'" /></div>';
+				$juegosBiblioteca=$juegosBiblioteca.'<a href="index.php?action=juego&id='.$value->Id_Juego.'">
+				<div id="juego"><img class="juego" src="http://cdn.akamai.steamstatic.com/steam/apps/'.
+				$foto .'/header.jpg?t='.$value->Imagen.'" /></div></a>';
  			}
 		}else{
-			$juegosBiblioteca=$juegosBiblioteca."No tienes juegos en la biblioteca";
+			$juegosBiblioteca=$juegosBiblioteca.'<div class="mensaje">No tienes juegos en la biblioteca</div>';
 		}
 		//var_dump($juegosBiblioteca);
 		$html = replace_content('/\#BIBLIOTECA\#/ms',$juegosBiblioteca,$html);
 		//$usuario1->mostrar($arrayBiblio);
 		$array=$usuario1->videosPerfil();
-		$videos='<span id="mensajeSeccion"><h1>Videos de '.$nombreUsuario.'</h1></span>';
+		$videos='<span class="mensajeSeccion"><h1>Videos de '.$nombreUsuario.'</h1></span>';
 		if(sizeof($array)>0){
 			foreach ($array as $key => $value){
 				$foto=$value->Id_Juego;
@@ -251,7 +283,7 @@ class mvc_controller {
 				$foto .'/header.jpg?t='.$value->Imagen.'" /></div>';
  			}
 		}else{
-			$videos=$videos."No tienes videos";
+			$videos=$videos.'<div class="mensaje">No tienes videos</div>';
 		}
 		//$array=$usuario1->actualizar();
 		$html = replace_content('/\#VIDEOS\#/ms',$videos,$html);

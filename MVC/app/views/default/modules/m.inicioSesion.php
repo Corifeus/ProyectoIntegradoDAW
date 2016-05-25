@@ -42,13 +42,19 @@
                     </p>
               <div class="control-group ">
           	      <input type="checkbox" name="privacidad" value="permisos"> Acepto que mi perfil sea publico
-                 	<p class="signin button"> 
+                 	
+                  <p class="signin button"> 
+                    
         	       		<input type="submit" value="Registrarse"/> 
         			   	</p>
+                  
                   <p class="change_link">  
         				     ¿Ya eres usuario?
         				     <a href="#tologin" class="to_register"> Empezar </a>
         				  </p>
+                  <p>
+                    <div class="g-recaptcha" data-sitekey="6Ldk3SATAAAAAPqH8zvPrJK-f8FZmdNzAVmDl4H1"></div>
+                  </p>
       	</form>
                	</div>		
             </div>

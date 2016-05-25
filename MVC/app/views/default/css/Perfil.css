@@ -101,7 +101,7 @@ body {
 
 }
 
-#mensajeSeccion{
+.mensajeSeccion{
   background-color: white;
   color: black;
   width: 100%;
@@ -110,3 +110,14 @@ body {
   margin-top: 25px;
    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
+
+.mensaje{
+  background-color: white;
+  font-size: 30px;
+  color: black;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 25px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+

@@ -3,6 +3,7 @@ class Database {
 	private $conexion;
 	public function conectar(){
 		$this->conexion=mysqli_connect("localhost","root","","digitalgamesBD");
+		//$this->conexion=mysqli_connect("52.40.90.253:3306","usuario","dg5","digitalgamesbd");
 		return $this->conexion;
 	}
 	public function consulta($sentencia){

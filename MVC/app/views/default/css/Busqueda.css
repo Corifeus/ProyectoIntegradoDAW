@@ -44,7 +44,7 @@ p{
 }
 
 
-#precio{
+.precio{
 
  width: 200px;
 
@@ -57,8 +57,9 @@ text-align: center;
 
 }
 
-#juego1{
+.juego1{
 
+    display: inline-block;
   text-align: center;
   height:200px;
   width: 200px;
