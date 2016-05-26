@@ -4,4 +4,3 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="app/views/default/css/footer.css">
 
-<script src='https://www.google.com/recaptcha/api.js'></script>

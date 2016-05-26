@@ -1,7 +1,14 @@
 <?php
 require_once("db.class.php");
 class Comentario extends Database{
+	/**
+	*Clase que contiene las funciones para interactuar con los comentarios
+	*Aún no disponible
+	*@author Digital Games
+	*@version 1.0
+	*/
 	function mostrarComentario($id){
+		
 		$this->conectar();
 		$sentencia="";
 

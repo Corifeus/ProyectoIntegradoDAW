@@ -1,15 +1,22 @@
 <?php
+/**
+*Clase administrador
+*@author Digital Games
+*@version 1.0
+*/
 require_once("db.class.php");
 require_once("juego.class.php");
-class Administrador extends Juego{
+class Administrador extends Usuario{
+	/**
+	*Función para actualizar la lista de precios y de juegos
+	*/
 	function actualizar(){
 		$this->conectar();
-		$tabla="juego";
 		$api=('http://steamspy.com/api.php?request=all');
 		$info=@file_get_contents($api);//Recoge las apis en la variable $info
 		$k=0;//$k es un contandor de juegos
 		$decodes=json_decode($info);
-		for($i=10;$i<700000;$i=$i+10) {
+		for($i=10;$i<500000;$i=$i+10) {
 	    	if(isset($decodes->{"$i"})){
 	    		$k++;
 	    		$v1=($decodes->{"$i"}->{'appid'});//Recoge el id
@@ -27,9 +34,9 @@ class Administrador extends Juego{
 						echo "Error al crear juego";
 					}
 				}
-				//Insertar el trigger
+				//Inserta el trigger
 				$trigger='DELIMITER$$
-						CREATE TRIGGER historico
+						CREATE TRIGGER IF NOT EXISTS historico
 						AFTER UPDATE ON producto
 						FOR EACH ROW
 						BEGIN 
@@ -82,6 +89,7 @@ class Administrador extends Juego{
 						$pre=str_replace(',', '.', $pre);
 						$pre=str_replace('Free To Play', '0.00', $pre);
 						$pre=str_replace('Free to Play', '0.00', $pre);
+						//Se actualizan los datos en la base de datos
 						$sentencia4="UPDATE juego SET Precio_Original=$pre, Fecha='$fec', Imagen=$ima WHERE Id_Juego=$ide;";
 						//echo $sentencia . "<br>";
 						if($this->consulta($sentencia4)){
@@ -90,6 +98,7 @@ class Administrador extends Juego{
 							print "Error al actualizar el juego $ide: $nom<br>";
 							print mysqli_error($objeto);
 						}
+						//Se añade el genero
 						$info=explode('Genre:</b>',$html)
 						$lista=explode('408">',$info[1]);
 						for($j=1;$j<(sizeof($lista)-1);$j++){
@@ -147,7 +156,13 @@ class Administrador extends Juego{
 		$this->disconnect();
 	}
 
-	function modificarOfertas($id,$precio){
+	/**
+	*Función para actualizar la lista de precios y de juegos
+	*@param integer $id identificador del juego cuya oferta se quiere modificar
+	*@param float $precio nuevo precio a insertar
+	*Metodo sin implementar en esta version
+	*/
+	function modificarOfertas($id,$precio){//Función no implementada
 		$this->conectar();
 		
 		$sentencia="UPDATE";

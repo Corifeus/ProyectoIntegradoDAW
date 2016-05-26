@@ -17,9 +17,10 @@
                	<input type="submit" value="Iniciar Sesión" /> 
     					</p>
              	<p class="change_link">
-		    				Enserio, ¿no estás registrado?
+		    				Enserio, ¿no estás registrado? 
 						    <a href="#toregister" class="to_register">Registrate</a>
 					    </p>
+
             </form>
       </div>
       <div id="register" class="animate form">
@@ -47,14 +48,14 @@
                     
         	       		<input type="submit" value="Registrarse"/> 
         			   	</p>
-                  
+                  <div class="g-recaptcha" data-sitekey="6Ldk3SATAAAAAPqH8zvPrJK-f8FZmdNzAVmDl4H1"></div>
                   <p class="change_link">  
         				     ¿Ya eres usuario?
         				     <a href="#tologin" class="to_register"> Empezar </a>
         				  </p>
-                  <p>
-                    <div class="g-recaptcha" data-sitekey="6Ldk3SATAAAAAPqH8zvPrJK-f8FZmdNzAVmDl4H1"></div>
-                  </p>
+
+                    
+
       	</form>
                	</div>		
             </div>

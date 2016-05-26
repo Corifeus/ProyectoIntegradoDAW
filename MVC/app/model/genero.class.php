@@ -1,6 +1,15 @@
 <?php
 require_once("db.class.php");
+/**
+*Clase que contiene las funciones listar y buscar por género
+*@author Digital Games
+*@version 1.0
+*/
 class Genero extends Database{
+
+	/**
+	*Metodo que lista los nombres de los generos
+	*/
 	function listarGeneros(){
 		if($this->conectar()){
 			//var_dump($c);
@@ -23,6 +32,11 @@ class Genero extends Database{
 		}
 	}
 
+	/**
+	*Metodo que selecciona los tres juegos más populares de un genero concreto
+	*@param integer $genero identificador del genero
+	*@return array $array vector con todos los datos de cada juego
+	*/
 	function juegosGenero($genero){
 		$this->conectar();
 		if($genero==5){
@@ -50,6 +64,11 @@ class Genero extends Database{
 		$this->desconectar();
 		return $array;
 	}
+
+	/**
+	*Busqueda de todos los juegos de un genero
+	*@return array $array vector con todos los datos de cada juego
+	*/
 	function buscarGenero(){
 		error_reporting(0);
 		if($this->conectar()){

@@ -1,6 +1,15 @@
 <?php
 require_once("db.class.php");
+/**
+*Clase para interactuar con el usuario registrado
+*Todas las funciones relacionadas con un usuario se encuentran aquí
+*@author Digital Games
+*@version 1.0
+*/
 class Usuario extends Database {
+	/**
+	*Registra un nuevo usuario y se inserta en la base de datos
+	*/
 	function registrar(){
 		if($this->conectar()){
 			$nombre=$_POST['nombre_usuario'];
@@ -39,6 +48,9 @@ class Usuario extends Database {
 		}
 	}
 
+	/**
+	*Inicia una sesion
+	*/
 	function login(){
 		//error_reporting(0);
 		if($this->conectar()){
@@ -65,7 +77,7 @@ class Usuario extends Database {
 					sleep(0);
 					//var_dump($_SESSION);
 			 	}
-			$this->desconectar();
+				$this->desconectar();
 			}else{
 	 			echo "Error al conectar con la base de datos";
 			}
@@ -73,10 +85,16 @@ class Usuario extends Database {
 		}
 	}
 
+	/**
+	*Cierra la sesión que se encontraba iniciada
+	*/
 	function logout(){
 		session_destroy();
 	}
 
+	/**
+	*Carga los datos del usuario que tiene iniciada la sesion
+	*/
 	function datosPerfil(){
 		//session_start();
 		if($_SESSION["nombreusuario"]==false){
@@ -97,6 +115,10 @@ class Usuario extends Database {
 		}
 	}
 
+	/**
+	*Carga el identificador del usuario cuya sesion se encuentra iniciada
+	*@return integer $id->Id_Usuario identificador del usuario
+	*/
 	function identificar(){
 		$this->conectar();
 		$sentencia='SELECT Id_Usuario FROM usuario WHERE Nombre = "'.$_SESSION["nombreusuario"].'"';
@@ -112,8 +134,10 @@ class Usuario extends Database {
 		}
 	}
 
-
-
+	/**
+	*Carga los juegos favoritos del usuario
+	*@return array $arrrayFavoritos vector con los datos de los juegos favoritos del usuario
+	*/
 	function favoritosPerfil(){
 		$this->conectar();
 		#SACAR LOS FAVORITOS
@@ -132,6 +156,10 @@ class Usuario extends Database {
 		return $arrayFavorito;
 	}
 
+	/**
+	*Carga los juegos de la biblioteca del usuario
+	*@return array $arrrayBiblio vector con los datos de los juegos de la biblioteca del usuario
+	*/
 	function bibliotecaPerfil(){
 		#SACAR LA BIBLIOTECA
 		$this->conectar();
@@ -151,6 +179,10 @@ class Usuario extends Database {
 		return $arrayBiblio;
 	}
 
+	/**
+	*Carga los videos subidos del usuario
+	*@return array $arrrayVideos vector con los datos de los videos del usuario
+	*/
 	function videosPerfil(){
 		$this->conectar();
 		#SACAR LOS FAVORITOS
@@ -167,8 +199,7 @@ class Usuario extends Database {
 		}
 		$this->desconectar();
 		return $arrayVideos;
-	}
-		
+	}	
 }
 
 ?>

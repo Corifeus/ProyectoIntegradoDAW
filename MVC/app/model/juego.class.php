@@ -1,6 +1,17 @@
 <?php
 require_once("db.class.php");
+/**
+*Clase para listar y mostrar toda la información de los juegos
+*También añade juegos en las tablas faboritos y biblioteca de la base de datos
+*@author Digital Games
+*@version 1.0
+*/
 class Juego extends Database{
+
+	/**
+	*Metodo que selecciona juegos más nuevos con cierto grado de popular y no gratuitos
+	*@return array $array vector con todos los datos de cada juego
+	*/
 	function portada(){
 		if($c=$this->conectar()){
 			//var_dump($c);
@@ -27,6 +38,10 @@ class Juego extends Database{
 		}
 	}
 
+	/**
+	*Carga los datos de un juego
+	*@return array $jeugo vector con todos los datos  del juego
+	*/
 	function mostrarDatos(){
 		$this->conectar();
 		$idJuego=$_GET['id'];
@@ -43,8 +58,12 @@ class Juego extends Database{
 		//var_dump($juego);
 		$this->desconectar();
 		return $juego;
-
 	}
+
+	/**
+	*Metodo que carga los precios de cada tienda de un juego
+	*@return array $precios vector con todos los precios de cada tienda
+	*/
 	function mostrarPrecios(){
 		$this->conectar();
 		$idJuego=$_GET['id'];
@@ -61,8 +80,12 @@ class Juego extends Database{
 		//var_dump($precios);
 		$this->desconectar();
 		return $precios;
-		
 	}
+
+	/**
+	*Metodo que realiza una busqueda por nombre
+	*@return array $array2 vector con todos los datos de cada juego encontrado
+	*/
 	function buscar(){
 		//error_reporting(0);
 		if($this->conectar()){
@@ -94,6 +117,11 @@ class Juego extends Database{
 		}
 		return $array2;
 	}
+
+	/**
+	*Metodo que busca por una serie de caracteristicas
+	*@return array $array vector con todos los datos de cada juego encontrado
+	*/
 	function buscarAvanzado(){
 		error_reporting(0);
 		if($this->conectar()){
@@ -126,6 +154,11 @@ class Juego extends Database{
 		}
 	}	
 	
+	/**
+	*Metodo que inserta en la base de datos un juego como favorito del usuario registrado
+	*@param integer $id identificador del juego
+	*@param integer $sesion identificador del usuario registrado
+	*/
 	function favoritos($id,$sesion){
 		if($this->conectar()){
 			$sentencia='INSERT INTO favoritos(Id_Juego,Id_Usuario) VALUES ('.$id.','.$sesion.')';
@@ -134,6 +167,11 @@ class Juego extends Database{
 		}
 	}
 
+	/**
+	*Metodo que inserta en la base de datos un juego en la biblioteca del usuario registrado
+	*@param integer $id identificador del juego
+	*@param integer $sesion identificador del usuario registrado
+	*/
 	function biblioteca($id,$sesion){
 		if($this->conectar()){
 			$sentencia='INSERT INTO biblioteca(Id_Juego,Id_Usuario) VALUES ('.$id.','.$sesion.')';
