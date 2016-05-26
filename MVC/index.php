@@ -12,7 +12,7 @@
      //se instancia al controlador 
 	$mvc = new mvc_controller();
 
-	//Comprobar Captcha en el formulario de registro
+		//Comprobar Captcha en el formulario de registro
 	// tu clave secreta
 	$secret = "6Ldk3SATAAAAAFG8sP8PKskk4aC0SPJ5DpvEk-p8";
 	 
@@ -22,17 +22,14 @@
 	// comprueba la clave secreta
 	$reCaptcha = new ReCaptcha($secret);
 	// si se detecta la respuesta como enviada
+
 	if ($_POST["g-recaptcha-response"]) {
 		$response = $reCaptcha->verifyResponse(
 	        $_SERVER["REMOTE_ADDR"],
 	        $_POST["g-recaptcha-response"]
 	    );
 	}
-	/*if ($response != null && $response->success) {
-        echo "Hola " . $_POST["nombre"] . " (" . $_POST["email"] . "), Gracias por registrarte!";
-	 } else{
-	 	 echo "Error en el registro";
-	 }*/
+	$user = new Usuario;
 
 	if( $_GET['action'] == 'inicio' ){
 			$mvc->principal();	
@@ -41,10 +38,16 @@
 			$mvc->genero();	
 	}
 	else if( $_GET['action'] == 'perfil' ){
-			$mvc->perfil();	
+		$mvc->perfil();	
 	}
 	else if( $_GET['action'] == 'registrarse' ){
-			$mvc->registrarse();	
+		if($response != null && $response->success) {
+			$user->registrar();
+        	$mvc->perfil();	
+		}else{
+	 		$user->login();
+	 	 	$mvc->registrarse();
+		}
 	}
 	else if( $_GET['action'] == 'avanzada' ){
 			$mvc->buscador();
@@ -54,7 +57,6 @@
 	}
 	else if( $_GET['action'] == 'juego' ){
 			$mvc->paginaJuego();
-	}
-	else{	
+	}else{	
 		$mvc->principal();
 	}

@@ -7,7 +7,7 @@
         		<form  action="index.php?action=perfil" autocomplete="on" method="post"> 
 			     		<p> 
                 <label for="username" class="uname" data-icon="" > Escribe tu nombre o tu usuario </label>
-                <input id="username" name="nombre" required="required" type="text" placeholder="Nombre de usuario"/>
+                <input id="username" name="nombre_usuario" required="required" type="text" placeholder="Nombre de usuario"/>
               </p>
              	<p> 
              		<label for="password" class="youpasswd" data-icon=""> Contraseña </label>

@@ -28,15 +28,13 @@ class Usuario extends Database {
 				$privacidad="No";
 			}
 			$_SESSION=$_POST;
-
 			//echo "$nombre---------$contrasenya----------- $email--------- $idsteam------- $privacidad";
 			/****** Programación mediante procesos ***********/
 			$sentencia="INSERT INTO usuario (Nombre,Contrasenya,Email,Id_Steam,Privacidad,Administrador) VALUES
 				('$nombre','$contrasenya','$email','$idsteam','$privacidad','No')";
-			print $sentencia;
+			//print $sentencia;
 			if($this->consulta($sentencia)){
 				//var_dump($_SESSION);
-				$this->desconectar();
 				$this->login();
 			}else{
  				print "<br>Se ha producido un error al registrarse en la base de datos<br>";
@@ -52,10 +50,11 @@ class Usuario extends Database {
 	*Inicia una sesion
 	*/
 	function login(){
-		//error_reporting(0);
+		error_reporting(0);
 		if($this->conectar()){
 			$tabla="usuario";
-			$nombre=$_POST['nombre'];
+			//var_dump($_POST);
+			$nombre=$_POST['nombre_usuario'];
 			$contrasenya=md5($_POST['contrasenya']);
 			$sentencia="SELECT * FROM $tabla WHERE Nombre='$nombre' AND Contrasenya='$contrasenya'";
 			//var_dump($sentencia);
